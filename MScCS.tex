@@ -209,7 +209,7 @@ This chapter describes the techniques used to develop RSAT. First Sony Lifelog a
 \section{Sony Lifelog}
 
 % Write about the smart armband
-The Sony Lifelog application is an Android application which is built around the idea about logging a users lifestyle and daily activities\cite{LifeLogDescr}. The application collects various data about its users through different sensors in a smartphone and SmartWear-devices (Sony SmartWatch or a Sony Smartband) and displays it to the user. Example of data it logs are information about what applications in the smartphone that have been used, what locations that have been visited and information about different physical activities performed during the day.  
+The Sony Lifelog application is an Android application which is built around the idea of logging a users lifestyle and daily activities\cite{LifeLogDescr}. The application collects various data about its users through different sensors in a smartphone and SmartWear-devices (Sony SmartWatch or a Sony Smartband) and displays it to the user. Example of data it logs are information about what applications in the smartphone that have been used, what locations that have been visited and information about different physical activities performed during the day.  
 
 \subsection{Sony SmartBand}
 
@@ -419,7 +419,6 @@ Three different types of data can be stored in the API\cite{GoogleFitDataTypes}:
 \end{itemize}
 
 
-
 \subsubsection{Apple Health}
 
 HealthKit is a developer framework that provides a common data structure for health and fitness applications. All the data stored in the HealthKit framework is stored in the \emph{HealthKit Store}. This removes the need for developers to write complex and custom made code to retrieve data from other apps.\cite{AppleHealthKitFramework}
@@ -465,7 +464,7 @@ According to Health Affairs, the leading journal of health policy, the interest 
 
 Several smart wear manufacturers have recently (see figure \ref{fig:timline}) started their own wellness programs, among these Jawbone\cite{JawboneWellness}, Fitbit\cite{FitbitWellness} and Garmin\cite{GarminWellness}. They have all built a system that focus on delivering the big picture about the employees health and to trigger the employees to get active by social interactions and challenges in the program. They have all integrated their products in their program. 
 
-The three companies mentioned above have all built their wellness programs around the idea about a common portal with a dashboard where all the participating employees can view their progress and compare it with their colleagues. The employees can also be split up into teams and specific team goals can be set for the teams. Administrators of a wellness program can measure the progress of the employees and their amounts of healthy activities through an administrative dashboard where statistics and summaries about the programs can be generated and viewed on the dashboard. 
+The three companies mentioned above have all built their wellness programs around the idea about a common portal with a dashboard where all the participating employees can view their progress and compare it with their colleagues. The employees can also be organized into teams and specific team goals can be set for the teams. Administrators of a wellness program can measure the progress of the employees and their amounts of healthy activities through an administrative dashboard where statistics and summaries about the programs can be generated and viewed on the dashboard. 
 
 Garmin have released a product called vivohub which is a hub that wirelessly can collect data from Garmin activity trackers in its surrounding. This device is installed at a in the workspace where the wellness program is run. By placing vivohub in a highly traffic place in office, the hub can collect the data from all employees passing by wearing a smart band. This removes the need to use a smartphone to synchronize the data with Garmin's wellness applications\cite{vivohub}. 
 
@@ -501,12 +500,12 @@ Tactio Health Group, a Canadian company, has developed a system called Tactio RP
 
 \subsection{Fruit Street}
 
-Fruit Street is a software system built to help health care providers connect with their patients. The system is made for the American market and has several different features. Fruit Street makes it possible for the nursing staff to have video chats and screen sharing sessions with their patients remotely. Appointments can be booked and payment collected using it. Patients can upload pictures of the food they are eating and share it with the nursing staff for nutrition purposes. 
+Fruit Street is a software system built to help health care providers connect with their patients. The system is made for the American market and has several different features. Fruit Street makes it possible for the clinicians to have video chats and screen sharing sessions with their patients remotely. Appointments can be booked and payment collected using it. Patients can upload pictures of the food they are eating and share it with the clinicians for nutrition purposes. 
 
 Another feature Fruit street has is the possibility for the patients to import data from their health trackers\cite{FruitStreet} in to the system. (For now it is only possible to connect smartwear products manufactured by Fitbit). To add a patient in Fruit Street, the following steps are performed:
 
 \begin{enumerate}
-    \item The nursing staff sends an invite to the patient via e-mail.
+    \item The clinician sends an invite to the patient via e-mail.
     \item The patient gets the invite and creates an account by filling in the following:
 \begin{itemize}
     \item Name
@@ -514,7 +513,7 @@ Another feature Fruit street has is the possibility for the patients to import d
     \item Date of Birth
     \item Password
 \end{itemize}
-    \item The patient fills out a health questionnaire created by the nursing staff.
+    \item The patient fills out a health questionnaire created by the clinician.
     \item A video chat application is installed on the patients device.
     \item The patient connects his or her Fitbit account with the system by logging in to Fitbit via a redirect from the Fruit Street's web application.
 \end{enumerate}
@@ -540,14 +539,20 @@ The user-interface to be used by the physiotherapist should be easy to use. It w
 
 The physiotherapist also wanted that RSAT should be able to automatically create and send different kinds of intelligent messages to the patients. Those messages should be used to encourage the patients to workout more or to flatter patients that been doing great progress. 
 
+
+\section{Constraints on RSAT}
+
+Two things had to be taken into account when the requirements for RSAT was made. (1) – Sony Lifelog was already the chosen data source. This meant that only data that could be tracked by Lifelog devices and that was accessible via the Lifelog API could be fetched into RSAT.  (2) – RSAT was to be integrated with a system that already existed (the planning system).  This meant that RSAT had to be architectured such that an integration was possible.
+
+The physiotherapist expressed an interest of being able to see data such as blood pressure and blood glucose levels in RSAT. This is data that is not possible to track with help of the Sony Lifelog platform and will therefore not exist in this version of RSAT.
+
+All patients that are participating in the RSAT-project must have a smartphone and a wristband. This however, is nothing that the health care can demand their patients to buy and is therefore something that they must be provided with from the health care.
+
+
 \section{Requirements}
 \label{sec:req}
-As the Lifelog platform was chosen to be the data source for the system, the constraints added due to the platform had to be taken into account when the requirements was created. This meant that all the wishes from the physiotherapist could not be fulfilled.
 
-
-The physiotherapist expressed an interest of being able to see data such as blood pressure and blood glucose levels in RSAT. This is data that is not possible to track with help of the Sony Lifelog platform. However, the planning system that RSAT is thought to be integrated with already have this functionality and these wishes was therefore ignored. 
-
-RSAT is, as stated before, thought to be integrated with an existing planning system that is already in use by the physiotherapist. The architecture of RSAT must therefore be designed such that it is easy to integrate RSAT with the planning system.
+Här beskriv krav. Vi har delat upp de i kategorier...
 
 \subsection{Activity data}
 
@@ -577,17 +582,18 @@ The physiotherapist wants a user-interface that is easy to use. Since RSAT shall
     \item The data in RSAT shall be easy to access for the staff using it.
     \item It shall be possible to create specific goals for each patient in the system.
     \item It shall be possible to create goal for each datatype that exists in RSAT.
-    \item It shall be possible for the nursing staff to have an overview over all patients showing if they have completed their goals or not. 
+    \item It shall be possible for the clinicians to have an overview over all patients showing if they have completed their goals or not. 
 
-    \item It shall be possible for the nursing staff to have an in depth view of each patient with history of all activity data.
+    \item It shall be possible for the clinicians to have an in depth view of each patient with history of all activity data.
 
 \end{itemize}
 
 \subsection{Other requirements}
 \begin{itemize}
-    \item Each patient shall be able to view the goals that the nursing staff has created for him/her.
+    \item Each patient shall be able to view the goals that the clinican has created for him/her.
     \item It shall be possible to see if a patient has been inactive for too long. Inactive means that the patient has not performed any physical activity during a time-interval that is considered to be too long.
     \item It shall be easy in later stages to add wristband from anther manufacture. 
+    \item A device/set of devices (smartphone and wristband) used by a patient shall be reusable. This means that a new patient can be equipped with the device/set of devices after the first patient has finished the program. 
 \end{itemize}
 
 \section{Initial idea}
@@ -619,15 +625,15 @@ Figure \ref{fig:pro} shows an overview of the solution followed by a description
     \item Each patient added in RSAT has a smart Sony SmartBand wristband around their wrist.
     \item The wristband collects data about the patient movements and the data is categorized into different activities.
     \item A Sony smartphone collects the data from the wristband via Bluetooth 4.0. 
-    \item The data is stored in the Sony Lifelog application on the smartphone and synchronized with Sony's online service.
-    \item RSAT fetches the data from the patient, analyzes it and saves it to a database.
-\item The RSAT web application retrieves the data from all patients in the database and visualizes it to the nursing staff.
+    \item The data is stored in the Sony Lifelog application on the smartphone and synchronized to Sony's cloud.
+    \item RSAT fetches the data for a patient, analyzes it and saves it to a database.
+\item The RSAT web application retrieves the data from all patients in the database and visualizes it to the clinicians.
 \item From the computer the nurse can interact with RSAT and see the progress of the patients. 
 \end{enumerate}
 
 \subsection{Process of adding a patient}
 
-Each patient in the program needs an activity tracker and something to sync the data to the cloud with. Because of the use of SWR10 and limitations of lifelog to only track biking on SONY phones. It was decided to equip every patient with a SONY phone for syncing and SWR10. These phones and smart band was borrowed from the hospital. To make it easy for the nursing staff and the patients to get started each phone and smart band was preconfigured. The process for doing so was the following:
+Each patient in the program needs an activity tracker and something to sync the data to the cloud with. Because of the use of SWR10 and limitations of lifelog to only track biking on SONY phones. It was decided to equip every patient with a SONY phone for syncing and SWR10. These phones and smart band was borrowed from the hospital. To make it easy for the clinicians and the patients to get started each phone and smart band was preconfigured. The process for doing so was the following:
 
 \begin{enumerate}
     \item{Phone and SmartBand is unboxed and charged.}
@@ -644,7 +650,7 @@ Each patient in the program needs an activity tracker and something to sync the 
     \item{The phone and SmartBand is marked with the name of the phone and SmartBand inserted in the system.}
 \end{enumerate}
 
-So when the nursing staff give smart band and phone to the patient the only thing the nursing staff do is linking the patients profile to the phone in RSAT. %%Denna meningen är urusel 
+So when the clinician gives smart band and phone to the patient the only thing the clinicians do is linking the patients profile to the phone in RSAT. %%Denna meningen är urusel 
 
 
 \chapter{Development}
@@ -739,7 +745,7 @@ An overview of the RSAT in the first iteration is shown in figure \ref{fig:secon
 
 \subsection{The web application}
 
-The web application is the user-interface to be used by the nursing staff. The nursing staff can view the data and goals for each patient in the RSAT from the interface. This part of the RSAT is written in JavaScript using Backbone as framework. When a nurse browses the activities of a patient the web application makes requests to the Database service through the web server. The communication between the web application and the web server is via HTTP.
+The web application is the user-interface to be used by the clinicians. The clinicians can view the data and goals for each patient in the RSAT from the interface. This part of the RSAT is written in JavaScript using Backbone as framework. When a nurse browses the activities of a patient the web application makes requests to the Database service through the web server. The communication between the web application and the web server is via HTTP.
 
 \subsection{The web server} % todo: TO BE REWRITTEN! Jens tempos fråga
 
@@ -790,7 +796,7 @@ Another feature that was implemented during this iteration was a feature such th
 The generic database service was used to create different types of database services. The following database services was created: 
 
 \begin{itemize}
-\item \emph{The database goal service}, which are used to store all goals of a user. When the nursing staff inputs a goal for an activity in to RSAT this service save that goal to the database. The service also handles the fetching of these goals. %(TODO: skriva mer om) kolla jens.
+\item \emph{The database goal service}, which are used to store all goals of a user. When the clinician inputs a goal for an activity in to RSAT this service save that goal to the database. The service also handles the fetching of these goals. %(TODO: skriva mer om) kolla jens.
 \item \emph{The database user service}, which handles the the names of smartphones in the system by mapping the name on the phone to an ID number. %(Todo. förklara bättre) Jens läs. 
 \item \emph{The database activity service}, which stores different activities and other data parsed from the Lifelog API. The data stored in the activities database service is parsed from the activities endpoint in the API. 
 \item \emph{The database user information}, which stores personal information about the users. The data is parsed from the Lifelog API.
@@ -908,8 +914,7 @@ Google Fit and Lifelog both has a REST API that third party users can use to fet
 
 
 \subsubsection{Lifelog compared to Apple health} 
-
-The big difference between Apple Health and Sony Lifelog is that Apple Health does not have a cloud API. Apple, on the other hand, has an API that applications run on their phones can use to insert and fetch data. Since the Sony API is read-only, it is not possible to insert any data at all for third-party users, a major disadvantage in comparison to Apple Health. 
+There are two big differences between Apple Health and Sony Lifelog. The first difference is that Apple Health does not have a cloud API. Apple, on the other hand, has an API that applications run on their phones can use to insert and fetch data. Since the Sony API is read-only, it is not possible to insert any data at all for third-party users, a major disadvantage in comparison to Apple Health. The second difference is that Apple Health can be used to store both health and fitness data, while Sony Lifelog only seems to be meant for fitness data. The difference between health- and fitness data might not be big but in the future the difference might very well be more distinct and it is therefore important to mention. 
 
 \subsubsection{Lifelog compared to Jawbone UP Platform}
 
@@ -947,7 +952,7 @@ Smart wear manufacturers that are creating their own wellness programs have have
 
 \subsection{Fulfillment of requirements}
 
-In this section all requirement are gone thought and seen if they are fulfilled. All wanted types of activity data from lifelog were implemented in RSAT. By using diagrams it was also possible to show the history of the data. The requirement of the user interface to be easy to use is hard to verify but a popular UI library were used to make it look familiar for web-users. It is also easy to create goals for every patient each every data type,. Because the patient has the same goals in the lifelog app as in RSAT it is possible to view the goals. A problem with this is that the patient and the nursing staff must sit together to set the goals. The requirement for measurements of inactivity was not fulfilled. Because the possibility to get activity data in real time was limited and required the smart band to always be connected to the phone. It was decided to not implement this feature.  An overview of the patients and whether they have completed their goals was not implemented due to a lack of time. But an detailed view for ever patient was implemented. To add another wristband only one service with the same commands as the Lifelog service has to be written. The authentication of this new has to be taken into account and added to the web-application. 
+In this section all requirement are gone thought and seen if they are fulfilled. All wanted types of activity data from lifelog were implemented in RSAT. By using diagrams it was also possible to show the history of the data. The requirement of the user interface to be easy to use is hard to verify but a popular UI library were used to make it look familiar for web-users. It is also easy to create goals for every patient each every data type,. Because the patient has the same goals in the lifelog app as in RSAT it is possible to view the goals. A problem with this is that the patient and the clinicians must sit together to set the goals. The requirement for measurements of inactivity was not fulfilled. Because the possibility to get activity data in real time was limited and required the smart band to always be connected to the phone. It was decided to not implement this feature.  An overview of the patients and whether they have completed their goals was not implemented due to a lack of time. But an detailed view for ever patient was implemented. To add another wristband only one service with the same commands as the Lifelog service has to be written. The authentication of this new has to be taken into account and added to the web-application. 
 
 
 
@@ -1003,6 +1008,44 @@ Lägg i dicussion.
 
 
 \chapter{Discussion}
+
+\section{Discussion around Lifelog}
+
+%The Sony Lifelog platform is user-focused. This means that each user has their own set of devices that tracks data about them. This is not what the RSAT-group wants. What the RSAT-group wants is quite the opposite, they want a system that is device focused, where each device is connected to a user and not the other way around. 
+
+%To conclude the use of the Lifelog platform we will discuss the pros and cons of the platform form the use in RSAT. The API was in our opinion easy to use. A simple REST API and good documentation made it easy to see the possibilities with the platform. Getting the activity data was quit strait forward. No to the cons of Lifelog and SWR10, a limitation of SWR10 is that the only way to get activity data from SWR10 is thought the Lifelong API. We ware not able to get the data directly on the phone without gonging thought the Lifelog cloud API. 
+
+%The obvious limitation of not being able to read goal from the API was annoying and forced us of making a clumsy workaround that force the patient and clinician input the goals both in RSAT and the Lifelog app.  There are two possible solutions for this problem. One is the possibility of writhing an app for the patient to use and that way to set goals. The other possibility is for the Lifelog api to change for allowing goals to be read and writhed.
+
+%If the API was writable it could be possible for the clinician send feedback to the Lifelog app running on the patients phone. It would also be possible for the clinician to change the goals of the patient without the need for the patient do visit the clinician. 
+
+%The user focus approached of the Lifelog API force us to make an Google or Sony Account for every patent that want to use the system. A better approach in our use case is a device focus approach. Where every divice can be manege by one login and the system only needed one account and connect all devises to that account. To get the data from a device only specify that device and get the data from the API. When a device change patent it can be done using only a one click action in RSAT if sony had a more device focused approach.
+
+To conclude the use of the Lifelog platform we will discuss the pros of the platform form the use in RSAT. And then describe three problems we ran into with the API and possible solutions.
+
+A good thing about API was in our opinion that it was easy to use. A simple REST API and good documentation made it easy to see the possibilities with the platform. Getting the activity data was quit strait forward and the format was easy to understand and parse. 
+ 
+No over to the problems we had with the Lifelog platform, here is a list of three main problems we found in our development of the system:
+
+\begin{itemize}
+\item Make it possible for the clinician to read or write the goals of the patient. This problem was addressed by saving goals is RSAT and then force the clinician to mirror the goals in RSAT and the Lifelog app manually.
+\item 	Making it possible for the clinician to in easy way to send feedback to the patient. This feature was not implemented due to lack of time and no easy was to do it thought the Lifelog API.
+\item To be able to change patient that use the phone. In our solution every patient has to have a Google or Sony Account this mean that we have to for every patient using a phone, the phone has to be connected to RSAT again for that  patient.
+\end{itemize}
+
+We have found two solutions that solve for Sony to solve all these problems we see in the Lifelog platform.
+
+The first solution is for Sony to open a low level API on the phone for talking directly to the SWR10. This would enable us the developers of RSAT to make an app that run on the phone that fetch the data from the band directly and send it to our system. This eliminate the need for a user account because the app can directly get the tracked activities from the band and the user i set remote using RSAT. Having the own app for RSAT would also make it possible to build a system  goals and feedback into the app.
+
+An alternative solution is that Sony change there Lifelog API. According to us the following changes  has to be done in the API to be optima for us in RSAT.
+ Allowing goals to be read and written in the Lifelog API. This will allow us the implement features for the clinician to read or write the goals of the patient.
+ Making is possible to write messages to the Lifelog app though the Lifelog API. This will make it possible for clinician to give feedback to the patients.
+To have a device focused approach intend of a user focused approach.  Wishes means instead of every use having an account every device has an ID and all devices can be manege by one login. RSAT will then only needed one account to connect to all devises. To get the data from a device only specify the ID of the device in the request to the API and the API will return data for that device.
+
+
+%However, the planning system that RSAT is thought to be integrated with already have this functionality and was therefore something that was ignored.
+
+
 
 \chapter{Conclusions}
 
