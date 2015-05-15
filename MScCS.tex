@@ -42,7 +42,7 @@ We would like to thank Lennart Andersson for his feedback on this template.
 }
 
 \theabstract{
-Many people suffering from kidney failure are in need of a kidney transplant. A problem in the health care is that patients cannot undergo surgery if they have too much belly fat. Regular exercises and physical activities are therefore something crucial for this group of people. A project group at the Skåne University Hospital has recently been established to help this group of people to loose weight. A question they asked themselves was whether it was possible to use any activity tracking devices in this project.  The purpose of this thesis is to design and evaluate a system that can be used to track the physical activities of patients with kidney failure. The system will be built with help of a Sony SmartBand, a wristband that collects and analyzes data about users daily activities. 
+Many people suffering from kidney failure are in need of a kidney transplant. A problem in the health care is that patients cannot undergo surgery if they have too much belly fat. Regular exercise and physical activity are therefore crucial for this group of people. A project group at the Skåne University Hospital has recently been established to help patients with kidney failure to lose weight. A question they asked themselves was whether it was possible to use activity tracking devices in the project. The purpose of this thesis is to design and evaluate a system that can be used to track the physical activities of the patients. The system will be built using a Sony SmartBand, a wristband collecting and analyzing data about a user's daily activities. The conclusions of the teases is that the system can be built but becomes complicated due to the Sony Lifelog platform. 
 }
 
 \keywords{kidney failure, activity tracking, loose weight, Sony Lifelog}
@@ -60,13 +60,13 @@ Many people suffering from kidney failure are in need of a kidney transplant. A 
 
 \chapter[Introduction]{Introduction}
 
-This thesis presents a system that aims to help over-weight patients with kidney failure to loose weight. The system is called the Region Skåne Activity tracking, or the RSAT. itACiH is a research project that investigates the possibilities of advanced health care at home of the patients. As a part of this project a planning-system was developed that is currently being used at the hospitals in Skåne. The planning system is built as a web application and can remotely fetch data from sensors that are installed at the home of a patient. RSAT is thought to be integrated with the planning system. 
+Many people suffering from kidney failure are in need of a kidney transplant. A problem in the health care is that patients can not undergo surgery if they have too much belly fat. It is very hard for this group of people to loose weight, as further described in section \ref{sec:kiney}. Regular exercise and physical activity are therefore crucial for these patients. 
 
-Many people suffering from kidney failure are in need of a kidney transplant. A problem in the health care is that patients cannot undergo surgery if they have too much belly fat. It is very hard for this group of people to loose weight, as further described in section \ref{sec:kiney}. Regular exercises and physical activities are therefore something crucial for this group of people. 
+This thesis presents a system with the aim of helping over-weight patients with kidney failure to loose weight. The system is called the Region Skåne Activity tracking, RSAT. itACiH is a research project that investigates the possibilities of advanced health care at home. As a part of this project a planning-system was developed that is currently being used at the hospitals in Skåne. The planning system is built as a web application and can fetch data from sensors that are installed in a patient's home. RSAT is thought to be integrated with the planning system. 
 
-A project group at the Skåne University Hospital (called the RSAT-group in this thesis) has recently been established to help this group of people to loose weight. A question they asked themselves was whether it was possible to use any activity tracking devices in this project. 
+A project group at the Skåne University Hospital (called the RSAT-group in this thesis) has recently been established to help patients in need of a kidney transplant to loose weight. One of their wishes was to use activity tracking devices in the project. 
 
-Sony has developed wearable devices that can track a user’s daily activities. The data collected by these devices are saved online in their database and accessible through an API called the Lifelog API. Sony wants to investigate what different use cases that exists for their wearable devices and has therefore chosen to sponsor this project with smart wristbands for the patients to wear.
+Sony has developed wearable devices that can track a user’s daily activities. The data collected by these devices are saved online in their database and accessible through an API called the Lifelog API. Sony wants to investigate what different use cases that exists for their wearable devices and has chosen to sponsor this project with smart wristbands for the patients to wear.
 
 
 
@@ -276,7 +276,7 @@ In this section, different commercial activity tracking systems on the market ar
 
 \section{Wearable technology}
 
-Wearable health and fitness devices are becoming more and more popular. Smart wristbands is the most popular devices  in this category, though it is predicted that the smart watches will become favored over the wristbands in 2015\cite{gartner}. The difference between a smart wristband and a smartwatch is a bit of a grey area. A smart wristband and a smartwatch have more or less the same functionality. Smart watches in general tend to have more functionality than a wristband, but this is not always the case. 
+Wearable health and fitness devices are becoming more and more popular. Smart wristbands are the most popular devices  in this category, though it is predicted that the smart watches will become favored over the wristbands in 2015\cite{gartner}. The difference between a smart wristband and a smartwatch is a bit of a grey area. A smart wristband and a smartwatch have more or less the same functionality. Smart watches in general tend to have more functionality than a wristband, but this is not always the case. 
 
 There exists a wide range of wearable health and fitness devices. A new technology in this area is "smart clothing", where different garments can track data such as movements and heart rate\cite{callaway2015quantified}. Progress has also been made in the fields of biosensors. Scientists at the University of San Diego have developed a tattoo-like sensor, which can measure the lactate levels in the blood by converting sweat into electricity\cite{tattoo-device}.
 
@@ -380,7 +380,7 @@ Jawbone is the manufacturer of several fitness trackers. Jawbone's first fitness
 \item A way to communicate with the application using Bluetooth LE.
 \end{itemize}
 
-Developers can read and write to endpoints in the API that defines what data types that can be stored in the platform. The communication to the API is REST-based. The endpoints contain different data such as information about a user's body temperature and heart rate. Third party applications can also create custom data entries using the \verb!generic_event! endpoint.\cite{JawboneCustomEndpoint}
+Developers can read and write data to the endpoints in the API. The API defines what data types that can be stored in the platform. The communication to the API is REST-based. The endpoints contain different data such as information about a user's body temperature and heart rate. Third party applications can also create custom data entries using the \verb!generic_event! endpoint.\cite{JawboneCustomEndpoint}
 
 \section{Systems similar to RSAT}
 
@@ -388,17 +388,15 @@ Wearable technology is already integrated in some systems on the market. Differe
 
 Some software systems to be used by health care providers are also integrating activity trackers in their system. Two examples are Fruit Street and Tactio. Fruit Street is an American company that are integrating Fitbit's activity trackers in their system and Tactio is an Canadian company integrating different activity trackers in their applications.
 
-\subsection{Wellness programs in general}
+\subsection{Wellness programs in working life}
 \label{sec:wellness-programs}
-% todo förklara att det bara "är för emplyees", wellness programs kan antas vara ett mer generellt begrepp
-
-Wellness programs encourage employees to be healthy. The goals with the programs are in general to get people to eat more healthy food and to stay active.
+Wellness programs are used in a variety of areas and are becoming more and more common in working life. Many corporations use wellness programs to encourage their employees to be healthy. The goals with the programs are in general to get people to eat more healthy food and to stay active.
 
 According to Health Affairs, the leading journal of health policy, the interest in wellness programs is growing\cite{baicker2010workplace}. They state that more than 60\% of the Americans get their health insurance from the company they are working at. It is therefore no surprise that workplace wellness programs can generate savings for a company. 
 
 Several smart wear manufacturers have recently (see figure \ref{fig:timline}) started their own wellness programs, among these Jawbone\cite{JawboneWellness}, Fitbit\cite{FitbitWellness} and Garmin\cite{GarminWellness}. They have all built a system that focus on delivering the big picture about the employees' health and to trigger the employees to get active by social interactions and challenges in the program. They have all integrated their products in their program. 
 
-The three companies mentioned above have all built their wellness programs around the idea about a common portal with a dashboard where all the participating employees can view their progress and compare it with their colleagues. The employees can also be organized into teams and specific team goals can be set for the teams. Administrators of a wellness program can measure the progress of the employees and their amounts of healthy activities through an administrative dashboard where statistics and summaries about the programs can be generated and viewed on the dashboard. 
+The three companies mentioned above have all built their wellness programs around a common portal with a dashboard where all the participating employees can view their progress and compare it with their colleagues. The employees can also be organized into teams and specific team goals can be set for the teams. Administrators of a wellness program can measure the progress of the employees and their amounts of healthy activities through an administrative dashboard where statistics and summaries about the programs can be generated and viewed. 
 
 Garmin has released a product called the vivohub. The hub collects data wirelessly from the Garmin activity trackers in it’s surrounding. The device is installed in the workspace where the wellness program is run. By placing vivohub in a highly trafficked place in an office, the hub can collect data from all employees wearing a wrist band. Thus, it removes the need for a smartphone to synchronize the data with Garmin's wellness applications\cite{vivohub}. 
 
@@ -424,7 +422,7 @@ The use of smart band in wellness programs is a fairly modern phenomenon as seen
 
 \subsection{Fruit Street}
 
-Fruit Street is a software system built to help health care providers connect with their patients. The system is made for the American market and has several different features. Fruit Street makes it possible for the clinicians to have video chats and screen sharing sessions with their patients remotely. Appointments can be booked and payment collected using it. Patients can upload pictures of the food they are eating and share it with the clinicians for nutrition purposes. 
+Fruit Street is a software system built to help health care providers connect with their patients. The system is made for the American market and has several different features. Fruit Street makes it possible for the clinicians to have video chats and screen sharing sessions with their patients. Appointments can be booked and payment collected. Patients can upload pictures of what food they are eating and share it with the clinicians for nutrition purposes. 
 
 Another feature Fruit street has is the possibility for the patients to import data from their health trackers\cite{FruitStreet} in to the system. (For now it is only possible to connect smartwear products manufactured by Fitbit). To add a patient in Fruit Street, the following steps are performed:
 
