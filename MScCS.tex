@@ -8,6 +8,8 @@
 \usepackage{amsthm}
 \usepackage{graphicx}
 \usepackage{tikz}
+\usepackage{pdfpages}
+
 
 %\bibliographystyle{alpha}
 
@@ -30,25 +32,24 @@
 %\title{RSAT}
 %\subtitle{A system for activity tracking of patients with kidney failure.}
 %\company{The Corporation AB LTD Inc}
-\supervisors{John Deer, \href{mailto:jdeer@company.com}{\texttt{jdeer@company.com}}}{Don Jeer, \href{mailto:djeer@xy.lth.se}{\texttt{djeer@xy.lth.se}}}
-\examiner{Jane Doe, \href{mailto:jane.doe@cs.lth.se}{\texttt{jane.doe@cs.lth.se}}}
+\supervisors{Boris Magnusson, \href{mailto:Boris.Magnusson@cs.lth.se}{\texttt{Boris.Magnusson@cs.lth.se}}}{Fredrik Nilsask, \href{mailto:fredrik.nilsask@cs.lth.se}{\texttt{fredrik.nilsask@cs.lth.se}}}
+\examiner{Görel Hedin, \href{mailto:gorel.hedin@cs.lth.se}{\texttt{gorel.hedin@cs.lth.se}}}
 
 \date{\today}
 %\date{January 16, 2015}
 
 \acknowledgements{
-If you want to thank people, do it here, on a separate right-hand page. Both the U.S. \textit{acknowledgments} and the British \textit{acknowledgements} spellings are acceptable.
+TODO!
+%If you want to thank people, do it here, on a separate right-hand page. Both the U.S. \textit{acknowledgments} and the British \textit{acknowledgements} spellings are acceptable.
 
-We would like to thank Lennart Andersson for his feedback on this template.
+%We would like to thank Lennart Andersson for his feedback on this template.
 }
 
 \theabstract{
-Many people suffering from kidney failure are in need of a kidney transplantation. A problem in the health care is that these patients cannot undergo surgery if they have too much belly fat. Regular exercise and physical activity are therefore crucial for this group of people. A project group at the Skåne University Hospital has recently been established to help patients with kidney failure to lose weight. A question they asked themselves was whether it was possible to use activity tracking devices to monitor patient’s activities. 
-
-The purpose of this thesis was to design and evaluate a system that can be used to track the physical activities of the patients. The system was built using a Sony SmartBand, a wristband collecting and analyzing data about a user's daily activities. The conclusions of the thesis is that the system can be built but becomes complicated to use due to Sony’s API.
+Many people suffering from kidney failure are in need of a kidney transplant. A problem in the health care is that patients cannot undergo surgery if they have too much belly fat. Regular exercise and physical activity are therefore crucial for this group of people. A project group at the Skåne University Hospital has recently been established to help patients with kidney failure to lose weight. A question they asked themselves was whether it was possible to use activity tracking devices in the project. The purpose of this thesis is to design and evaluate a system that can be used to track the physical activities of the patients. The system will be built using a Sony SmartBand, a wristband collecting and analyzing data about a user's daily activities.
 }
 
-\keywords{kidney failure, activity tracking, loose weight, Sony Lifelog}
+\keywords{kidney failure, activity tracking, lose weight, Sony Lifelog}
 
 %% Only used to display font sizes
 \makeatletter
@@ -63,15 +64,15 @@ The purpose of this thesis was to design and evaluate a system that can be used 
 
 \chapter[Introduction]{Introduction}
 
-Many people suffering from kidney failure are in need of a kidney transplant. A problem in the health care is that patients can not undergo surgery if they have too much belly fat. It is very hard for this group of people to loose weight, as further described in section \ref{sec:kiney}. Regular exercise and physical activity are therefore crucial for these patients. 
+Many people suffering from kidney failure are in need of a kidney transplant. A problem in the health care is that patients cannot undergo surgery if they have too much belly fat. It is very hard for this group of people to lose weight, as further described in section \ref{sec:kiney}. Regular exercise and physical activity are therefore crucial for these patients. 
 
-This thesis presents a system with the aim of helping over-weight patients with kidney failure to loose weight. The system is called the Region Skåne Activity tracking, RSAT. 
-itACiH is a research project that investigates the possibilities of advanced health care at home. As a part of this project a planning-system was developed that is currently being used at the hospitals in Skåne. The planning system is built as a web application and can fetch data from sensors that are installed in a patient's home. RSAT is thought to be integrated with the planning system. 
+This thesis presents a system with the aim of helping over-weight patients with kidney failure to lose weight. The system is called the Region Skåne Activity Tracking, RSAT. 
+itACiH is a research project that investigates the possibilities of advanced health care at home. As a part of the itACiH project a planning-system was developed that is currently being used at the hospitals in Skåne. The planning system is built as a web application and can fetch data from sensors that are installed in a patient's home. RSAT is thought to be integrated with the planning system. 
 %% Förslag på ändring
 % RSAT was developed to be integrated in a planning system already in use at the hospital. The planning system is develop in a research project called itACiH. itACiH investigates the possibilities of advanced health care at home. The planning system is built as a web application and can fetch data from sensors that are installed in a patient's home. 
-A project group at the Skåne University Hospital (called the RSAT-group in this thesis) has recently been established to help patients in need of a kidney transplant to loose weight. One of their wishes was to use activity tracking devices in the project. 
+A project group at the Skåne University Hospital (called the RSAT-group in this thesis) has recently been established to help patients in need of a kidney transplant to lose weight. One of their wishes was to use activity tracking devices in the project. 
 
-Sony has developed wearable devices that can track a user’s daily activities. The data collected by these devices are saved online in their database and accessible through an API called the Lifelog API. Sony wants to investigate what different use cases that exists for their wearable devices and has chosen to sponsor this project with smart wristbands for the patients to wear.
+Sony has developed wearable devices that can track a user’s daily activities. The data collected by these devices are saved online in their cloud and accessible through an API called the Lifelog API. Sony wants to investigate what different use cases that exists for their wearable devices and has chosen to sponsor this project with smart wristbands for the patients to wear.
 
 
 
@@ -81,11 +82,9 @@ Sony has developed wearable devices that can track a user’s daily activities. 
 
 \section{Purpose and question formulation}
 
-%The purpose of this thesis is to build a system that can be used in the health care to help patients with kidney failure to loose weight.
-The purpose of this thesis was to design and evaluate a system that can be used to track the physical activities of the patients. The Sony Lifelog API will be used as the foundation for the system. As a step in building the system, an investigation about how well suited the API is to be used will also be performed. 
+The purpose of this thesis is to build a system that can be used in the health care to help patients with kidney failure to lose weight. The Sony Lifelog API will be used as the foundation for the system. As a step in building the system, an investigation about how well suited the API is to be used will be performed. 
 
-The following questions will be %used to fulfill the purpose: 
-answered in this thesis:
+The following questions will be used to fulfill the purpose: 
 
 \begin{quote}
 \centering
@@ -96,7 +95,7 @@ answered in this thesis:
 \centering
 \emph{How well suited is RSAT, the system to be developed, to be used in the health care?}
 \end{quote}
-%Frågeställningarna behöver vi tyvärr fortfarande fila på. vettitusan hur vi ska göra här...
+
 
 \begin{comment}
 The following questions will be used to fulfill the purpose: 
@@ -122,31 +121,23 @@ The system will be made up from requirements that have been created in collabora
 
 \end{comment}
 \section{Method}
-Before the development of RSAT could start, an interview with the RSAT-group was held. Their wishes was used as input when the requirements for the system was created. Thereafter a proof-of-concept system was developed to verify that it was possible to use the Lifelog API.
+Before the development of RSAT could start, an interview with the RSAT-group was held. Their wishes was used as input when the requirements was created. Thereafter a proof-of-concept system was developed to verify that it was possible to use the Lifelog API.
 
-Then the phase of writing production code for RSAT begun. The approach for the development was to use iterations. Each iteration resulted in a demo for the RSAT-group. During the demo feedback was given from the RSAT-group. The experience from the development of the system created the foundation for the evaluation of both the Lifelog platform and RSAT.
+Iterative prototyping was used to develop RSAT. For each iteration, the current requirements was identified and implemented. Each iteration resulted in a demo that the RSAT-group evaluated. Feedback from the RSAT-group was used as input to the next iteration. Sometimes the feedback resulted in new requirements on the system and if those was feasible, they was added to a development iteration.  
 
-Each iteration followed these steps: 
-
-\begin{enumerate}
-\item Identify the requirements for the current prototype.
-\item Implement functionality in the system such that the system fulfills the requirements.
-\item Test the developed prototype and publish it such that others can test our software.
-\item Receive feedback from testers and use it as input to the next prototype. 
-\item Receive new requirements on the system and if the requirements are feasible, add them to a later iteration. 
-\end{enumerate}
+In parallel with the development, a research investigating different wearable devices and different platforms used for activity tracking was performed. The experience from this investigation in combination with the experience from the development of the system created the foundation for the evaluation of both the Lifelog platform and RSAT.
 
 
 %%%%%%%%%%%%%%%%%%
 
 \section{Disposition}
+The thesis is organized into three different parts; an overview part, a development part and an evaluation part. 
 
-The first part of this thesis gives an overview of the landscape that RSAT acts in. First a medical background is given, then a technical background describing the techniques used in RSAT. After that related work describing  different warble technologies, platforms for aggregation of activity data and  systems similar to RSAT. 
+The overview part consists of chapters 2, 3 and 4. It gives a medical background, describing why RSAT is needed and a technical background that describes the Lifelog platform. It also contains an introduction to PalCom, the framework that RSAT is built on. The last chapter in this part describes related work. Related work includes information about different wearable technologies, platforms for aggregation of activity data and other systems that are similar to RSAT. 
 
-The second part of this thesis contains a description of the development of RSAT. From the initial thoughts in the RSAT group to the last prototype. Telling about all decisions and struggles.  
+The development part consists of chapters 5 and 6. This part contains information about the requirements on the system, what decisions that were made, why the decisions were made and how RSAT was implemented.
 
-At last the RSAT and Lifelog is evaluated and compared to other systems described in the first part of the thesis. Also some conclusions are drawn.
-
+The evaluation part consists of chapters 7 and 8. RSAT and Lifelog are evaluated and compared to the other systems described in the first part of the thesis. 
 
 
 % BRA KÄLLA to be used: http://www.kidney.ca/facing-the-facts
@@ -158,6 +149,7 @@ Kidneys have the responsibility of filtering waste products from the blood in th
 In this chapter an introduction to chronic kidney disease is given, beginning with a short introduction to chronic conditions in general. Chapter 2.2 discusses chronic kidney disease especially.
   
 \section{Chronic conditions}
+\label{sec:chronic}
 
 The costs in the health care are ever increasing. A huge part of the health care and the economic costs associated with it addresses patients with chronic conditions. More than 60\% of all deaths in the world is due to this types of complications. In Sweden 80\% of all health care costs go to treating these conditions\cite{SmartCare}. A study shows that three types of lifestyle behaviors  leads to four chronic diseases. These diseases accounts for about 50\% of all the deaths worldwide, see figure \ref{fig:chronic-fig}\cite{callaway2015quantified}.
 
@@ -167,11 +159,7 @@ The costs in the health care are ever increasing. A huge part of the health care
 \caption{Figure  describing what lifestyle behaviors that increases the risk of death}\label{fig:chronic-fig}
 \end{figure}
 
-As seen in figure \ref{fig:chronic-fig} physical inactivity is one factor that could lead to a chronic condition. 
-
-%There are also other chronic condition that will benefit from physical activity and more information about one of them in the section below. 
-
-%% Den utmarkerade texten ovan kanske ska mergeas, läggas till igen på något vis när kidney failure-sektionen är genomgången. 
+Physical inactivity, as seen in figure \ref{fig:chronic-fig} , is one factor that could lead to a chronic condition. 
 
 \section{Chronic kidney disease}
 \label{sec:kiney}
@@ -184,7 +172,7 @@ DIALYSIS: http://www.vardhandboken.se/Texter/Dialys-peritonealdialys/Oversikt/
 
 Chronic kidney disease (CKD) is a gradual loss of kidney function over time\cite{KIDNEYFOUNDATION}. There are no specific symptoms of the disease but illness, tiredness and a reduced appetite are all common symptoms. As the kidney function is worsening, waste products build to high levels in the blood and may cause complications such as high blood pressure,  muscle and bone mass loss. The risk of getting other diseases such as cardiovascular disease, pericarditis and anemia is also growing.  When the waste products in a patient’s body becomes so high that the patient starts to get sick from it, the patient requires dialysis\cite{KIDNEYFOUNDATION}.%todo: kolla över mening
 
-People with severe CKD are in need of a kidney transplant. Until a transplant can be performed, dialysis is required. Without dialysis, the patients would have a poor life expectancy\cite{KIDNEYFOUNDATION}. Dialysis is a cumbersome treatment process for a patient as it takes up a lot of time and adds a lot of constraints to the patient’s life. Dialysis is also expensive for the society. A rough estimate of the annual cost of treating one patient with dialysis in Sweden is 500 000 – 1 000 000 SEK. 
+People with severe CKD are in need of a kidney transplant. Until a transplant can be performed, dialysis is required. Without dialysis, the patients would have a poor life expectancy\cite{KIDNEYFOUNDATION}. Dialysis is a cumbersome treatment process for a patient as it takes up a lot of time and adds a lot of constraints to the patient’s life. Dialysis is also expensive for the society. A rough estimate of the annual cost of treating one patient with dialysis in Sweden is 250 000 – 500 000 SEK. \cite{sr}
 
 Peritoneal dialysis and hemodialysis are dialysis that can be performed in the home of a CKD-patient. The principle behind peritoneal dialysis is that a sterile solution containing glucose is run into the patient’s abdomen\cite{DIALYSIS}. The peritoneum inside the patient acts as a membrane across which waste products from the blood is filtered. A downside with the peritoneal dialysis is that the calorie intake increases, since the sterile solution contains glucose. Hemodialysis is a kind of blood dialysis, where blood is filtered outside the body.
 
@@ -215,7 +203,7 @@ The location endpoint provides a list of coordinates specifying what locations a
 
 Third parties can access the API to retrieve collected data about a user. Every request made to the API must be authorized and https must be the chosen communication protocol. The lifelog Web API uses OAuth 2.0 as its authorization mechanism. To connect to the API, a user must login and give explicit permission for the application or the service to access to the data. 
 
-The response to a valid request made to the API contains a result-section. This result-section is a set of data represented as JSON objects. If the requested data is too large to fit in the size of one response message, the data is split up into several messages and a link-field is inserted into the response. This link-field contains a link pointing to the location from where the rest of the data can be fetched. 
+The response to a valid request made to the API contains a set of JSON objects. If the requested data is too large to fit in the size of one response message, the data is split up into several messages and a link-field is inserted into the response. This link-field contains a link pointing to the location from where the rest of the data can be fetched. 
 
 
 \subsubsection{REST}
@@ -249,10 +237,10 @@ The following is a general example of the protocol flow when a client is accessi
 	\item A client requests authentication from a resource owner. 
 	\item The client receives an authorization grant credential from the resource owner.    
 	\item The client requests an access token from the authorization server. The server verifies the authorization grant credential and returns an access token. 
-	\item The client receives an access token, which he/she can use to access the protected data in the resource server. 
+	\item The client receives an access token, which can use to access the protected data in the resource server. 
 \end{enumerate}
 
-The Authorization Grant is a credential representing the resource owner's authorization. The IETF's OAuth 2.0 specification defines four different grant types; authorization code, implicit, resource owner password credentials and client credentials. The Sony Lifelog API uses the authorization code as its grant type and the other types will therefore not be further discussed\cite{LifeLogAuth}. When the authorization code grant type is used, the resource owner is redirected to an authentication server when the client requests authentication. When the resource owner has granted the request, the resource owner is redirected back to the client together with the authorization code, which is appended in the URL. The authentication code is short lived and single-use, meaning that if the code is used more than once, the access tokens related to the code will be revoked.
+The Authorization Grant is a credential representing the resource owner's authorization. The IETF's OAuth 2.0 specification defines four different grant types; authorization code, implicit, resource owner password credentials and client credentials. The Sony Lifelog API uses the authorization code as its grant type and the other types will therefore not be further discussed\cite{LifeLogAuth}. When the authorization code grant type is used, the resource owner is redirected to an authentication server when the client requests authentication. When the resource owner has granted the request, the resource owner is redirected back to the client together with the authorization code, which is appended in the URL. The authentication code is short lived and single-use.
 
 The access token is the only credential needed to access a user's protected resource and can be seen as an abstraction layer, since other credentials such as user-name and password must not be provided. An access token is valid until it expires or is revoked.  
 
@@ -262,23 +250,23 @@ A refresh token can be issued together with an access token and, as the name sug
 The planning system in the itACiH project use PalCom as their platform. PalCom is a platform that makes it possible to build software systems, which consists of small sub-systems\cite{ist-PalCom}. These sub-systems are called \emph{PalCom Services}. Different services are composed together with the help of assemblies. Some of the most common and important components in the PalCom platform are: 
 
 \begin{itemize}
-\item \emph{PalCom service} - A PalCom service is a type of self-contained system. The service contains logic for both computations and interactions with the outside world. The implementation of services is made in Java and can therefore leverage the whole Java ecosystem. Every version of a service has unique id called \emph{serviceId} and every instance of a service has an unique id called \emph{instance}. 
+\item \emph{PalCom service} - A PalCom service is a type of self-contained system. The service contains logic for both computations and interactions with the outside world. The implementation of services is made in Java and can therefore leverage the Java ecosystem. Every version of a service has a unique id called \emph{serviceId} and every instance of a service has an unique id called \emph{instance}. 
 
 
 \item \emph{PalCom command} - A PalCom command is what a PalCom Service uses to communicate with other services. A service defines a number of commands, either \emph{in-commands} or \emph{out-commands}. An in-command defines the format of a command sent to the service and an out command defines the format of a command sent from the service. A command consists of zero or more parameters. Each parameter has a name and a data type. The data type defines what type of data is sent in the parameter. 
 
-\item \emph{PalCom assemblies} - PalCom Assemblies are rules explaining how PalCom commands shall be routed in a PalCom network. An assembly connects a service out-commands with another service in-commands and vice-versa. This is what makes it possible for different services to communicate with each other. An assembly connecting services with each other could have the following rule:  “when service s1 sends command cmdOut, send it to cmdIn on service s2". Assemblies are meant to make the interconnection between different services easy to implement.
+\item \emph{PalCom assemblies} - PalCom Assemblies are rules explaining how PalCom commands shall be routed in a PalCom network. An assembly connects a service out-commands with another service in-commands and vice-versa. This is what makes it possible for different services to communicate with each other. An assembly connecting services with each other could have the following rule:  “when service s1 sends command cmdOut, send it to command cmdIn on service s2". Assemblies are meant to make the interconnection between different services easy to implement.
 
 \item \emph{PalCom device} - A PalCom device is a container that runs one or more services and has a unique id called \emph{deviceId}.
 
-\item \emph{PalCom Runtime Component} - Each service has a mechanism, which makes it possible to discover other services and to advertise its existence. This mechanism is called the PalCom Runtime Component. Different services can run on an application called theThing. theThing is a type of PalCom device. It has a JVM for running services and an interpreter for assemblies. It also handles all the network configuration and connections.
+\item \emph{PalCom Runtime Component} - Each service has a mechanism, which makes it possible to discover other services and to advertise its existence. This mechanism is called the PalCom Runtime Component. Different services can run on an application called theThing. theThing is a type of PalCom device. It has a JVM for running services and an interpreter for assemblies. It also handles all the network configuration and connections in a PalCom network.
 
 \end{itemize}
 
 
 \chapter[Related Work]{Related Work}
 
-There exists a wide range of different fitness tracking products on the market. Polar, Fitbit, Garmin, Samsung, to name a few, are all companies, which have released one or several fitness devices. Many of the products have more or less the same functionality. Basic features they have in common are presented in section \ref{sec:Wearable}. The data gathered by the fitness devices needs to be stored somewhere. Three platforms that aggregates different health and fitness data are therefore also presented in this section.
+There exists a wide range of different fitness tracking products on the market. Polar, Fitbit, Garmin, Samsung, to name a few, are all companies, which have released one or several fitness devices. Many of the products have more or less the same functionality. Basic features they have in common are presented in section \ref{sec:Wearable}. The data gathered by fitness devices needs to be stored somewhere. Three platforms that aggregates different health and fitness data are therefore also presented in this section.
 
 \section{Wearable technology}
 
@@ -292,15 +280,13 @@ There exists a wide range of wearable health and fitness devices. A new technolo
 \label{sec:Wearable}
 The focus in this section is on wristbands but the descriptions also holds for smart watches.
 
-Movement tracking and sleep tracking are two common features in the smart wristbands that exist on the market. According to Quantified Wellness, an article published by RGA Reinsurance Company\cite{callaway2015quantified}, most of the data are collected through an accelerometer in the device. Many of the smart wristbands also takes advantages of the GPS in the smartphone they are connected to in order to increase the accuracy of the measurements.
+Movement tracking and sleep tracking are two common features in the smart wristbands that exist on the market. According to Quantified Wellness, an article published by RGA Reinsurance Company\cite{callaway2015quantified}, most of the data are collected through an accelerometer in the device. Many of the smart wristbands also takes advantages of the GPS in the smartphone they are connected to and thereby increases the accuracy of the measurements. Data collected in this type of fitness devices has shown to differ a lot. For example an equally long walk could differ between different activity tracker from 8.9 km to 14.5 km \cite{wearable-technology-cannot-be-trusted}.
 
-Other features that exist in wristbands on the market are the ability to track a user's heart rate, body temperature, blood oxygen level, respiration rate and galvanic skin response. The ways these sensors are used in different wristbands differ. In some wristbands, the user must activate a sensor in order to make a measurement and in some other wristbands data are collected without any interaction with the user at all.
+Other features that exist in wristbands on the market are the ability to track a user's heart rate, body temperature, blood oxygen level, respiration rate and galvanic skin response. The ways these sensors are used in different wristbands differ. In some wristbands, the user must activate a sensor in order to make a measurement and in some wristbands data are collected without any interaction with the user at all.
 
-The most common type of heart rate sensor is optical and uses LED-lights and an optical sensor to detect the amounts of blood flowing through the wrist in order to calculate a user’s pulse. The accuracy of different optical heart rate sensors varies a lot. In a test performed by CNET, four fitness trackers with an optical heart rate sensor were used to measure the heart rate. The results were then compared to the pulse measured by an EKG machine. The variance in the results were big.  At a pulse rate of 80 – 90 bpm, all of the devices was able to measure the heartbeat and was at the most 10\% off from the real heart rate. At a heart rate of 160 – 170 bpm, one of the trackers could not measure any data at all and two of the trackers were more than 50\% off\cite{CNET}. One of the devices used in the test, a Samsung Galaxy S5 smartphone, proved to be very accurate. It was at most 3\% off compared to the EKG-result.
+The most common type of heart rate sensor is optical and uses LED-lights in combination with an optical sensor to detect the amounts of blood flowing through the wrist in order to calculate a user’s pulse. The accuracy of different optical heart rate sensors varies a lot. In a test performed by CNET, four fitness trackers with an optical heart rate sensor were used to measure the heart rate. The results were then compared to the pulse measured by an EKG machine. The variance in the results were big.  At a pulse rate of 80 – 90 bpm, all of the devices was able to measure the heartbeat and was at the most 10\% off from the real heart rate. At a heart rate of 160 – 170 bpm, one of the trackers could not measure any data at all and two of the trackers were more than 50\% off\cite{CNET}. One of the devices used in the test, a Samsung Galaxy S5 smartphone, proved to be very accurate. It was at most 3\% off compared to the EKG-result. A chest strap was also used to measure the pulse. The results from the chest strap was very close to the EKG when the heart rate was between 160-170 and about 10\% off when it measured the heart rate at 80 – 90 bpm. The chest strap measures the pulse by measuring electrical pulse in a similar way to the EKG-machine and it is therefore expected that the results from the chest strap should be more accurate. 
 
-A chest strap was also used to measure the pulse. The results from the chest strap was very close to the EKG when the heart rate was between 160-170 and about 10\% off when it measured the heart rate at 80 – 90 bpm. The chest strap measures the pulse by measuring electrical pulse in a similar way to the EKG-machine and it is therefore expected that the results from the chest strap should be more accurate. 
-
-Another type of heart rate monitor used in some wristbands is an impedance sensor. The impedance sensor measures the resistance of body tissue and uses that data to calculate the pulse. Jawbone Up3 and Jawbone Up4 are using this technique. These devices have recently hit the market and any comments about their actual accuracy can therefore not be given. The pro with the impedance sensor is that it can be used to measure more data such as respiration rate and galvanic skin response. Important to mention is that Up3 and Up4 will mainly focus on resting heart rate. This is something that most of the manufacturers of fitness trackers that are using optical sensors also state that they do. 
+Another type of heart rate monitor used in some wristbands is an impedance sensor. The impedance sensor measures the resistance of body tissue and uses that data to calculate the pulse. Jawbone Up3 is using this technique\cite{up3}. These devices have recently hit the market and any comments about their actual accuracy can therefore not be given. The pro with the impedance sensor is that it can be used to measure more data such as respiration rate and galvanic skin response. Important to mention is that Up3 and Up4 will mainly focus on resting heart rate. This is something that most of the manufacturers of fitness trackers that are using optical sensors also state that they do. 
 
 Some wristbands on the market are equipped with a display. The display can be used to deliver different kinds of intelligence feedback to the user and also to deliver different kinds of notifications such as if the user has been inactive for too long or reached an activity goal.  Feedback and notifications are also delivered to the user through different kinds of vibrations and sounds in the wristbands. 
 
@@ -310,7 +296,7 @@ Most or all of the smart wristbands needs to be connected to a smartphone. The s
 
 Most of the smart wristbands on the market are strongly tied to the manufacturer’s own ecosystem, meaning that a user needs to use the manufacturers own applications to view the data collected by the wristband. An interesting company, which has chosen to go in the opposite direction, is Angel. Angel has, according to themselves\cite{angelfaq}, developed the first smart wristband for health and fitness. It is based on an open platform, which includes connectivity, protocols, and SDK. 
 
-The awareness and usage of wearables are on the rise. However, it has been showed that a third of all users who obtained a fitness device more than 12 months ago are no longer using it. The data collected by different fitness devices has also been showen to differ a lot. For example a equal long walk could differ between different activity tracker from 8.9 km to 14.5 km \cite{wearable-technology-cannot-be-trusted}.
+The awareness and usage of wearables are on the rise. However, it has been showed that a third of all users who obtained a fitness device more than 12 months ago are no longer using it.
 
 
 
@@ -345,7 +331,7 @@ Wristbands in general does not have a screen, even though some of them have. Wat
 \subsection{Different Activity Tracking Platforms}
 
 \subsubsection{Google Fit}
-Google Fit is an open platform for both Android and web applications to share and store fitness data. An application collecting fitness data from a fitness tracker can store the data in the Google Fit API. It can also read other data from the API and use it for different calculations. This makes it simple for an application to integrate fitness data collected by different fitness tracking devices. It also makes it convenient for a user to change fitness tracking device as the data the device is collecting will have the same structure in the API\cite{GoogleFitOverview}. 
+Google Fit is an open platform for both Android and web applications to share and store fitness data. An application collecting fitness data from a fitness tracker can store the data in Google Fit via the API. It can also read other data from the API and use it for different calculations. This makes it simple for an application to integrate fitness data collected by different fitness tracking devices. It also makes it convenient for a user to change fitness tracking device as the data the device is collecting will have the same structure in the API\cite{GoogleFitOverview}. 
 
 Google fit is focused on fitness data and Google states that the data shall not be used for medical appliance. The terms state very clearly that the API is not for storing "medical or biometric data". The Google fit API may not be used in medical apps without the permission from Google\cite{GoogleFitTerm}. 
 
@@ -366,7 +352,7 @@ HealthKit is a developer framework that provides a common data structure for hea
 
 Apple Health is an application that makes it possible for the user to visualize the data stored in the HealthKit store. In the Health application users also have the ability to create emergency cards, e.g. medical IDs, in which they can insert medical information about themselves such as what their blood-type is or what allergies they have.
 
-In the Health application the user explicitly controls which apps that are allowed to access the HealthKit store and what data they are allowed to read or write. When an app request data from Apple Health and is not granted access it gets back an empty response. This means that an application, which is denied access to some data cannot know whether it has been denied or if the data does not exist.
+In the Health application the user explicitly controls which apps that are allowed to access the HealthKit store and what data they are allowed to read or write. When an application requests data from Apple Health and is not granted access it gets back an empty response. This means that an application, which is denied access to some data cannot know whether it has been denied or if the data does not exist.
 
 Apple does not use cloud storage for their HealthStore. Instead, all data is stored locally on the phone. 
 
@@ -386,7 +372,7 @@ Jawbone is the manufacturer of several fitness trackers. Jawbone's first fitness
 \item A way to communicate with the application using Bluetooth LE.
 \end{itemize}
 
-Developers can read and write data to the endpoints in the API. The API defines what data types that can be stored in the platform. The communication to the API is REST-based. The endpoints contain different data such as information about a user's body temperature and heart rate. Third party applications can also create custom data entries using the \verb!generic_event! endpoint.\cite{JawboneCustomEndpoint}
+Developers can read and write data to the endpoints in the API. The API defines what data types that can be stored in the platform. The communication to the API is REST-based. The endpoints contains different data such as information about a user's body temperature and heart rate. Third party applications can also create custom data entries using the \verb!generic_event! endpoint.\cite{JawboneCustomEndpoint}
 
 \section{Systems similar to RSAT}
 
@@ -402,11 +388,11 @@ According to Health Affairs, the leading journal of health policy, the interest 
 
 Several smart wear manufacturers have recently (see figure \ref{fig:timline}) started their own wellness programs, among these Jawbone\cite{JawboneWellness}, Fitbit\cite{FitbitWellness} and Garmin\cite{GarminWellness}. They have all built a system that focus on delivering the big picture about the employees' health and to trigger the employees to get active by social interactions and challenges in the program. They have all integrated their products in their program. 
 
-The three companies mentioned above have all built their wellness programs around a common portal with a dashboard where all the participating employees can view their progress and compare it with their colleagues. The employees can also be organized into teams and specific team goals can be set for the teams. Administrators of a wellness program can measure the progress of the employees and their amounts of healthy activities through an administrative dashboard where statistics and summaries about the programs can be generated and viewed. 
+The different wellness programs mentioned above all have a portal with a dashboard where all the participating employees can view their progress and compare it with their colleagues. The employees can also be organized into teams and specific team goals can be set for the teams. Administrators of a wellness program can measure the progress of the employees and their amounts of healthy activities through an administrative dashboard where statistics and summaries about the programs can be generated and viewed. 
 
 Garmin has released a product called the vivohub. The hub collects data wirelessly from the Garmin activity trackers in it’s surrounding. The device is installed in the workspace where the wellness program is run. By placing vivohub in a busy place in the office, the hub can collect data from all employees wearing a wrist band. Thus, it removes the need for a smartphone to synchronize the data with Garmin's wellness applications\cite{vivohub}. 
 
-The use of smart band in wellness programs is a fairly modern phenomenon as seen in figure \ref{fig:timline}\cite{fitbitWellnessStat}\cite{jawboneWellnessStat}\cite{garminWellnessStat}.
+
 
 \begin{figure}[!hbt]
 \centering
@@ -415,7 +401,7 @@ The use of smart band in wellness programs is a fairly modern phenomenon as seen
 \event{\decimaldate{12}{10}{2014}}{Jawbone}
 \event{\decimaldate{5}{1}{2015}}{Garmin}
 \end{chronology}
-\caption{A timeline showing when three different smart wear manufacturers released their wellness programs.}
+\caption{A timeline showing when three different smart wear manufacturers released their wellness programs\cite{fitbitWellnessStat}\cite{jawboneWellnessStat}\cite{garminWellnessStat}.}
 \label{fig:timline}
 \end{figure}
 
@@ -428,7 +414,7 @@ The use of smart band in wellness programs is a fairly modern phenomenon as seen
 
 \subsection{Fruit Street}
 
-Fruit Street is a software system built to help health care providers connect with their patients. The system is made for the American market and has different features. Fruit Street makes it possible for the clinicians to have video chats and screen sharing sessions with their patients. Appointments can be booked and payment collected. Patients can upload pictures of what food they are eating and share it with the clinicians for nutrition purposes. 
+Fruit Street is a software system built to help health care providers connect with their patients and is made for the American market. Fruit Street makes it possible for the clinicians to have video chats and screen sharing sessions with their patients. Appointments can be booked and payments collected. Patients can upload pictures of what food they are eating and share it with the clinicians for nutrition purposes. 
 
 Another feature Fruit street has is the possibility for the patients to import data from their health trackers\cite{FruitStreet} into the system. (For now it is only possible to connect smartwear products manufactured by Fitbit). To add a patient in Fruit Street, the following steps are performed:
 
@@ -472,14 +458,14 @@ A general design sketch of RSAT is given in chapter \ref{sec:proposed-solution}.
 
 What the physiotherapist considered most important was that RSAT should be able to track a patient’s physical activity and automatically detect that a patient has been inactive for too long. RSAT should be able to detect different kinds of physical activity, both activities such as strength training and activities such as running or walking. Initially it was also wished that data such as pulse, blood pressure and blood glucose levels should exist for each patient in the system. Another feature that was regarded important was that it should be possible to track the weight of the patients. The patients should also be able to upload photos of what food they are eating.
 
-The user-interface to be used by the physiotherapist should be easy to use. It was also expressed that there was a need for at least two kinds of views: (1) - An overview, where all patients can be listed and where it is easy to see the status of each patient. (2) - A specific view where details about each patient can be viewed.
+The user-interface to be used by the physiotherapist should be easy to use. It was also expressed that there was a need for at least two kinds of views: (1) An overview, where all patients can be listed and where it is easy to see the status of each patient. (2) A specific view where details about each patient can be viewed.
 
 The physiotherapist also wanted that RSAT should be able to automatically create and send different kinds of intelligent messages to the patients. Those messages should be used to encourage the patients to workout more or to flatter patients that have been doing great progress. 
 
 
 \section{Constraints on RSAT}
 
-Two things had to be taken into account when the requirements for RSAT were made. (1) – Sony Lifelog was already the chosen data source. This meant that only data that could be tracked by Lifelog devices and that was accessible via the Lifelog API could be fetched into RSAT.  (2) – RSAT was to be integrated with a system that already existed (the itACiH planning system).  This meant that RSAT had to be architecture such that integration was possible..
+Two things had to be taken into account when the requirements for RSAT were made. (1) Sony Lifelog was already the chosen data source. This meant that only data that could be tracked by Lifelog devices and that was accessible via the Lifelog API could be fetched into RSAT.  (2) RSAT was to be integrated with a system that already existed (the itACiH planning system). This meant that the architecture of RSAT had to be designed such that an integration was possible.
 
 The physiotherapist expressed an interest of being able to see data such as blood pressure and blood glucose levels in RSAT. This is data that is not possible to track with help of the Sony Lifelog platform and will therefore not exist in this version of RSAT.
 
@@ -488,8 +474,7 @@ All patients that are participating in the RSAT-project must have a smartphone a
 
 \section{Requirements}
 \label{sec:req}
-
-Här beskriv krav. Vi har delat upp de i kategorier...
+%TODO: Skriva ingress här? Kanske iaf... 
 
 \subsection{Activity data}
 
@@ -508,7 +493,7 @@ Lifelog can collect many kinds of data. All of the data that Lifelog can collect
     \item Weight.
 \end{itemize}
 
-It was also decided that it should be possible to browse the history of all the collected data in RSAT. This function was considered important, since it would make it possible to see if the patient’s make any progression or follow the instructions.
+It was also decided that it should be possible to browse the history of all the collected data in RSAT. This function was considered important, since it would make it possible to see if patients tracked in RSAT makes any progress, i.e. if they increase their amount of physical activity or not. 
 
 \subsection{User-interface}
 The physiotherapist wants a user-interface that is easy to use. Since RSAT shall be integrated with the planning system mentioned above, this was also taken into consideration. The following requirements was set on the user-interface:
@@ -518,7 +503,7 @@ The physiotherapist wants a user-interface that is easy to use. Since RSAT shall
     \item The user-interface shall be easy to use.
     \item The data in RSAT shall be easy to access for the staff using it.
     \item It shall be possible to create specific goals for each patient in the system.
-    \item It shall be possible to create goal for each datatype that exists in RSAT.
+    \item It shall be possible to create goals for each datatype that exists in RSAT.
     \item It shall be possible for the clinician to have an overview of all patients, showing if they have completed their goals or not. 
 
     \item It shall be possible for the clinicians to have an in depth view of each patient with history of all activity data.
@@ -528,25 +513,23 @@ The physiotherapist wants a user-interface that is easy to use. Since RSAT shall
 \subsection{Other requirements}
 \begin{itemize}
     \item Each patient shall be able to view the goals that the clinician has created for him/her.
-    \item It shall be possible to see if a patient has been inactive for too long.% Inactive means that the patient has not performed any physical activity during a time interval that is considered to be too long.
-    \item It shall be easy in later stages to add wristband from another manufactures. 
-    \item A device/set of devices (smartphone and wristband) used by a patient shall be reusable. This means that a new patient can be equipped with the device/set of devices after the first patient has finished the program. 
+    \item It shall be possible to see if a patient has been inactive for too long.
+    \item It shall be possible to integrate other wearable devices from other manufacturers in future versions of RSAT.
+    \item A device/set of devices (smartphone and wristband) used by a patient shall be reusable. A new patient shall be able to be equipped with the same device/set of devices that have been used by another patient before.
 \end{itemize}
 
 \section{Initial idea}
-The initial idea was to develop a specific Android application that was installed on each patient’s smartphone. This would have been the ultimate choice but this idea was thrown and it was chosen that the patients would use the Sony Lifelog Application instead. The two major reasons for this decision were. 
-(1) Sony has invested a lot of resources to create the Lifelog application that runs on most newer Android devices. This application has almost all the functionality that the physiotherapist initially asked for.
+The initial idea was to develop a specific Android application that was installed on each patient’s smartphone. This would have been the ultimate choice but this idea was thrown and it was chosen that the patients would use the Sony Lifelog Application instead. The two major reasons for this decision were: (1) Sony has invested a lot of resources to create the Lifelog application that runs on most newer Android devices. This application has almost all the functionality that the physiotherapist initially asked for.
 (2) That the schedule for building the RSAT was quite tight. If an Android application should be developed the time frame would have to be changed. It would also be hard to create an application that the patient’s would prefer to use instead of the Lifelog application.
 
-The Sony Lifelog API is a read-only API. Hence, it is not possible to write any data to the API. This means that it is not possible for the physiotherapist to set goals that are automatically updated in the patients Lifelog accounts. What also is a problem is that the goals are not accessible at all through the API. This means that in order to set goals, the physiotherapist must have a meeting with the patient where they together set the different goals for the patient. At this meeting, the physiotherapist inserts the goals in RSAT and the patient inserts the goals in the Lifelog application. 
+The Sony Lifelog API is a read-only API. Hence, it is not possible to write any data to the API. It is therefore not possible for the physiotherapist to set goals that are automatically updated in the patients Lifelog accounts. Another problem is that the goals are not accessible at all through the API. This means that in order to set goals, the physiotherapist must have a meeting with the patient where they together set the different goals for the patient. At this meeting, the physiotherapist inserts the goals in RSAT and the patient inserts the goals in the Lifelog application. 
 
 \section{Final idea}
 \label{sec:proposed-solution}
 % mer lim
-It was decided that the patient will use the lifelog application and that the system developed in the thesis only is a web application. 
+It was decided that the patients tracked in RSAT will use the Lifelog application. It was also decided that a web application will be developed that the clinicians can use to track the activities of the patients.
+
 Figure \ref{fig:pro} shows an overview of the solution followed by a description of the steps for transferring the data from the patient to the physiotherapist.
-
-
 
 \begin{figure}[!hbt]
 \centering
@@ -557,42 +540,34 @@ Figure \ref{fig:pro} shows an overview of the solution followed by a description
 
 \begin{enumerate}
     \item Each patient added in RSAT has a smart Sony SmartBand wristband around his or her wrist.
-    \item The wristband collects data about the patient movements and the data is categorized into different activities.
-    \item A Sony smartphone collects the data from the wristband via Bluetooth 4.0. 
+    \item The wristband collects data about each patient's movements and the data is categorized into different activities.
+    \item A Sony smartphone collects the data from the wristband. 
     \item The data is stored in the Sony Lifelog application on the smartphone and synchronized to Sony's cloud.
-    \item RSAT fetches the data for a patients account, analyses it, and saves it to a database.
+    \item RSAT fetches data from each patient's RSAT-account in the Lifelog cloud, processes it and saves it to a database.
 \item The RSAT web application retrieves the data from all patients in the database and visualizes it to the clinicians.
-\item From the computer the nurse can interact with RSAT and see the progress of the patients. 
+\item The clinicians can interact with RSAT and see the progress of each patient via the web application. 
 \end{enumerate}
 
 \subsection{Process of adding a patient}
 
-Each patient in the program needs an activity tracker and something to sync the data to the cloud with. Because of the use of Sony smart band SWR10 and limitations of Lifelog to only track biking on SONY phones, it was decided to equip every patient with a SONY phone and SWR10. The patient borrowed these phones and smart band from the hospital. To make it easy for the clinicians and the patients to get started , each phone and smart band was preconfigured using the following steps:
+Each patient in the program will be equipped with a Sony SmartBand and an Android smartphone that are borrowed from the hospital. The SmartBand must synchronize its data to a smartphone and that is the reason why the patients are also equipped with a smartphone and not only a SmartBand.   
+
+To make it easy for the clinicians and the patients to get started, each smartphone and SmartBand will be  preconfigured by an administrator. The following steps are used to configure the devices and accounts for the patients:
 
 \begin{enumerate}
-%    \item{Phone and SmartBand is unboxed and charged.}
-    \item{A new Google account is created for the phone.}
-    \item{The Google account is used to install the needed apps:
-%\begin{itemize}
-%    \item Lifelog
- %   \item SmartBand SWR10
-%    \item SmartConnect 
-%\end{itemize}
-}
-    \item{The Lifelog application is logged in via the Google account.}
-   \item{A SWR10 is connected with the phone.}
-    \item{The phone is added to our system and given a name.}
-    \item{The phone and the SmartBand is marked with the name of the phone and the SmartBand inserted in the system.}
+    \item{A new Google account is created to be used in the Lifelog application.}
+    \item{All neccessary applications are downloaded to the smartphone.}
+    \item{The SmartBand is connected with the smartphone.}
+    \item{The smartphone is added to RSAT and given a unique name.}
 \end{enumerate}
 
-When the clinician gives the smart band and the phone to the patient they only need to link the patients profile to the phone in RSAT. %%Denna meningen är urusel 
+When a new patient is added to RSAT, the clinician gives him/her the preconfigured set of devices. The clinican also links the patients profile to the smartphone's name in RSAT. 
 
 
 \chapter{Development}
-This chapter describes the development cycles of the RSAT. It also gives a brief introduction to the different 3rd-party libraries and PalCom services that have been used to build the RSAT.
+This chapter describes the development cycles of the RSAT. It also gives a brief introduction to the different 3rd-party libraries and PalCom services that have been used to build RSAT.
 
 \section{3rd-party libraries and services}
-%This section gives a brief introduction to the different 3rd-party libraries and PalCom services that have been used to build the RSAT.
 
 \subsection{JavaScript libraries}
 Several different JavaScript libraries have been used to develop the web application of RSAT. The frameworks used the most are briefly described below: 
@@ -611,36 +586,24 @@ The itACiH-project has developed a generic database service that can be extended
 
 \begin{itemize}
     \item \emph{json} - This parameter describes the parameters sent to the database in a JSON format. 
-    \item \emph{class-name} - This parameter tells the database service how to interpret the JSON-data sent in the json-parameter by providing the name of a predefined class in which the keys in the json-parameter exists as attributes.
+    \item \emph{classname} - This parameter tells the database service how to interpret the JSON-data sent in the json-parameter by providing the name of a predefined class in which the keys in the json-parameter exists as attributes.
 \end{itemize}
 
-Depending on what class-name that is stated in a command received in the service, different database operations are performed. The operations to be performed are predefined in the service. A command sent to the database can look like this: 
+Depending on what classname that is stated in a command received in the service, different database operations are performed. The operations to be performed are predefined in the service. A command sent to the database can look like this: 
 
 \begin{verbatim}
 {
-'json' : '{"userId":3,"date":"2015-02-15T00:00:00","steps":30}',
-'classname'	: 'databaseStep.RequestAddStepInterval'
+'json': '{"userId":3,"date":"2015-02-15T00:00:00","steps":30}',
+'classname': 'databaseStep.RequestAddStepInterval'
 }
 \end{verbatim}  
 
-When this command is received, the server converts the JSON-data in the command to a Java object of the class "RequestAddStepInterval", which exists in the package "databaseStep". Then the service communicates with the actual database and performs the actions that are defined in a predefined statement in the service. 
+When this command is received, the server converts the JSON-data in the json-parameter in the command to a Java object of the class "RequestAddStepInterval", which exists in the package "databaseStep". Then the service communicates with the actual database and performs the actions that are defined in a predefined statement in the service. 
 	
 \subsubsection{The WebServer service}
 \label{sec:webserver}
 
-\begin{comment}
-WEB SERVER ANTECKNINGAR.. saker vi kanske vill lägga till och ha med: 
-The server handles asynchronous communications between the service and the 
-
-definierar era servies
-skriver lite js
-kopplar upp. 
-öppnar en socket. 
-kommer upp som en device utan servicear
-kan inte koppla ihop med assemblies
-webappen måste veta vilka servicar den ska prata med
-\end{comment}
-The PalCom Web Bridge is used to connect web applications with PalCom services.  The PalCom Web Bridge is therefore referred to as the web server in this thesis. The first version of the web server was developed in 2012 and was based on long-polling. It is described in the PalCom Web Bridge Design Document\cite{XXXXXXNULL}. The current version of the web server makes use of web sockets instead. 
+The PalCom Web Bridge is used to connect web applications with PalCom services.  The PalCom Web Bridge is therefore referred to as the web server in this thesis. The first version of the web server was developed in 2012 and was based on long-polling. It is described in the PalCom Web Bridge Design Document\cite{webServer}. The current version of the web server makes use of web sockets instead. 
 
 A configuration object is needed to establish a connection between the web server and another PalCom-service. The configuration object is used to establish a web-socket and specifies device-id, service-id and instance name of the service its establishing the socket with. When the web-socket is established, in-commands can be sent to the service and out-commands can be listened to via the web service from a web-application.
 
@@ -659,14 +622,14 @@ The web application was developed in JavaScript, using Backbone as framework. Fi
 
 \begin{figure}[!hbt]
 \centering
-\includegraphics[scale=0.8]{first_prototype_screenshot_crop.png} 
-\caption{A printscreen prototype 1}\label{fig:firstV_screen}
+\includegraphics[scale=0.8]{first_prototype_screenshot_crop2.png} 
+\caption{A printscreen of RSAT from prototype 1}\label{fig:firstV_screen}
 \end{figure}
 
 
 \section{First iteration}
-In the first iteration cycle of RSAT, an architecture based on the PalCom platform was introduced.  It consisted of a web-application (that was more or less the same as the one developed in the proof-of-concept system) and four different PalCom-services. The version of RSAT from this iteration could fetch data about a user’s steps per day and sleep behavior. This data was stored in a database and could be accessed and read via the web application. An overview of the system and its different services are shown in figure \ref{fig:second-version}. A short summary about each service can be read in the subsections of this section. 
-
+In the first iteration cycle of RSAT, an architecture based on the PalCom platform was introduced.  It consisted of a web-application (that was more or less the same as the one developed in the proof-of-concept system) and four different PalCom-services. The version of RSAT from this iteration could fetch data about a user’s steps per day and sleep behavior. This data was stored in a database and could be accessed and read via the web application. The decision to store the data in RSAT was due to long loading-times when fetching the data directly from Sony's cloud.
+An overview of the system and its different services are shown in figure \ref{fig:second-version}.  
 
 
 \begin{figure}[!hbt]
@@ -681,12 +644,12 @@ The web application is the user-interface to be used by the clinicians. From her
 
 \subsection{The web server}
 
-The web application uses http as its communication protocol. In order for the web application to communicate with the PalCom-services in the system, a component that can translate the http requests in to PalCom-requests and vice versa is therefore needed. This is what the web server does. The web server is described in section \ref{sec:webserver}. 
+The web application uses http as its communication protocol. In order for the web application to communicate with the PalCom-services in the system, a component that can translate the http requests in to PalCom-command and vice versa is therefore needed. This is what the web server does. The web server is described in section \ref{sec:webserver}. 
 
 
 \subsection{The Database service}
 
-The database handles the communications with the database. The database service has been described in section \ref{sec:dbservice}. When it receives a command, it performs different requests to the database. Depending on what type of command that was sent the service creates a response or responses to be sent back to the service making the request and/or to other services in the network.
+The database service handles the communications with the database. The database service has been described in section \ref{sec:dbservice}. This service can input and query step and sleep data. When it receives a command, it performs different requests to the database. Depending on what type of command that was sent the service creates a response or responses to be sent back to the service making the request and/or to other services in the network.
 
 \subsection{The Update service}
 
@@ -719,7 +682,7 @@ Another feature implemented during this iteration was a feature making it easy t
 \begin{figure}[!hbt]
 \centering
 \includegraphics[scale=0.4]{forth-version.pdf} 
-\caption{An overview of the system in the second iteration}\label{fig:second-itr}
+\caption{An overview of the system's architecture from the second iteration}\label{fig:second-itr}
 \end{figure}
 
 
@@ -734,7 +697,7 @@ The generic database service was used to create different types of database serv
 
 \item \emph{The database activity service}, which stores different activities and other data parsed from the Lifelog API. The data stored in the activities database service is parsed from the activities endpoint in the API. 
 
-\item \emph{The database user information}, which stores personal information about the users. The data is parsed from the Lifelog API.
+\item \emph{The database user information}, which stores personal information about the users. An example is the weight is stored in this service. The data is parsed from the Lifelog API.
 
 \item \emph{The database sleep service}, that stores information about a users sleep. The data is parsed from the activities endpoint in the Lifelog API.
 \end{itemize}
@@ -746,16 +709,10 @@ In this iteration the updater service from iteration 1 has been divided up into 
 The following database services exists in the RSAT:
 
 \begin{itemize}
-\item \emph{The Update activity service}, which triggers a signal to update activity data.
+\item \emph{The Update activity service}, which triggers a signal to update activity data. Activity data includes the following: steps taken, walking time, running time, biking time and calories burned.
 \item \emph{The Update sleep service}, which triggers a signal to update sleep data.
 \item \emph{The Update user information service}, which triggers an update of user information.
 \end{itemize}
-
-%\subsection{Adding users}
-
-%In the first version of RSAT, adding a user was a complex process. First, the user had to follow a link to a login page hosted by Sony and login. Thereafter the used had to grant RSAT access to his or hers account. 
-
-%For adding a user to RSAT the first step is authentication of the user and getting the code. This code can then be sent to the Lifelog service for authorization of the Lifelog data. The authentication is done on Sonys authentication servers and the redirected back to the site with a code in the URL of the redirect. When making the redirect to the Lifelog authentication server, a state can be sent in the URL to the authentication server. This state is also in the redirect from the authentication server. In the solution proposed in this thesis a user name is provided before  the redirect to the authentication server. This user name is sent in the sate variable of the URL. After the redirection from the authentication server back to RSAT the user name is fetched from the URL and the user added to the system. The code from the authentication server is sent to the Lifelog service where the rest of the steps for authorization is done. This is not the correct use of the state parameter according to the OAuth 2 specification but there was no knowledge about this during the second iteration.
 
 
 \subsection{The user interface}
@@ -778,7 +735,7 @@ These improvements were based on feedback from the project group. Figure \ref{fi
 \begin{figure}[!hbt]
 \centering
 \includegraphics[scale=0.4]{seceenshot-second-version.pdf} 
-\caption{Printscreen from the second iteration}\label{fig:second-screen}
+\caption{A printscreen of RSAT from prototype 2}\label{fig:second-screen}
 \end{figure}
 
 \chapter{Evaluation}
@@ -796,13 +753,13 @@ To get accurate data from activity trackers there are essentially two important 
 There exist other wristbands on the market that have more sensors. More sensors could imply that more accurate data could be collected. This is however, something that highly depends on the accuracy of the sensor data and the algorithms used. It is essential that the patients and the physiotherapist can trust the data that is gathered by the wristband to be able to draw conclusions from it. More sensors should therefore not be included if there is a risk that the collected data is inaccurate. More sensors would not only mean that it was possible to collect more data, it would also mean that calculations about things such as physical activity could be improved since more data could be used as input to the calculations. %todo utveckla med exempel kanske?
 
 
-The heart rate is something the physiotherapist has expressed an interest of being able to see. If the heart rate were known, it would be easier to know how active each patient is during a day. The fact that the SWR10 does not have any heart rate sensor is therefore one of its major disadvantages. On the other hand, it is good that Sony has chosen to not integrate a sensor that cannot deliver useful data. As stated before, optical heart rate sensors tend to perform badly at higher heart rates. TThe usefulness of optical heart rate monitors when exercising is therefore somewhat debatable. But the data from a heart rate monitor could still be used as input to find out whether somebody performs any physical activity or is inactive. This would be valuable information for the physiotherapist.
+The heart rate is something the physiotherapist has expressed an interest of being able to see. If the heart rate was known, it would be easier to know how active each patient is during a day. The fact that the SWR10 does not have any heart rate sensor is therefore one of its major disadvantages. On the other hand, it is good that Sony has chosen to not integrate a sensor that cannot deliver useful data. As stated before, optical heart rate sensors tend to perform badly at higher heart rates. The usefulness of optical heart rate monitors when exercising is therefore somewhat debatable. But the data from a heart rate monitor could still be used as input to find out whether somebody performs any physical activity or is inactive. This would be valuable information for the physiotherapist.
 
 
 %To compare the results of different wristbands and tell which one that is the most accurate an empirical investigation would be needed.  % Todo flytta till diskussion?-
 
 
-Some of the smart bands have display and this makes the smart band more independent of the phone. When the display shows the progress the only use of the phone is to the sync the data to the cloud. In our case real time update is not an important feature so syncing the band once a day would be acceptable. Therefore a display could eliminate the need for patients to walk around with a phone at all times.
+Some of the smart bands have a display and this makes the smart bands more independent of the smartphone. A smart band that has a display only needs the smartphone to synchronize data to the cloud. Real time update is not an important feature in RSAT meaning that syncronizing the bands once a day would be acceptable. Therefore a display could eliminate the need for patients to always carry both a smartband and a smartphone.
 
 %For patients to be able to use the smart band independent, without the use of an phone. A screen is important to be able to see the progress of training. Here the swr10 has drawbacks but sony has an swr30 with a screen. 
 
@@ -814,32 +771,33 @@ The Lifelog API will be evaluated from two different perspectives. (1) - Is it a
 
 \subsubsection{REST or not}
 
-Sony states that the Lifelog API is REST-based. In order to be a REST API the API must fulfil the architectural principles that were presented in chapter \ref{sec:rest}. We have evaluated the API and concluded that it actually is a REST API. Below you find comments on why the API fulfils each principle: 
+Sony states that the Lifelog API is REST-based. In order to be a REST API the API must fulfill the architectural principles that were presented in chapter \ref{sec:rest}. We have evaluated the API and concluded that it actually is a REST API. Below you find comments on why the API fulfils each principle: 
 
 \begin{itemize}
-    \item \emph{Addressability} - Each request to the Sony Lifelog contains a time interval and a list of data types telling what you want your response to contain. No matter when or how many times you query the API, you will query for the same data. The addressability principle therefore holds, as you can address a resource using a unique URL. 
+    \item \emph{Addressability} - Each request to the Sony Lifelog contains a time interval and a list of data types telling what you want your response to contain. The queries to the API are idempotent. Two queries containing the same request will always be responded with equal results. The addressability principle therefore holds, as you can address a resource using a unique URL. 
     \item \emph{Uniform interface} - The Sony Lifelog is a read-only API and only supports GET requests. It therefore has a uniform interface.
     \item \emph{Stateless Interaction} -  The communication with the API is stateless. The only exception to this is the authentication part of the communication that is using OAuth2. When an access token is issued, the API must verify that the client’s credentials are correct and the authentication is therefore not stateless. However, the authentication can be seen as something that happens before the connection to the API, which would make the API-communication completely stateless.
-    \item \emph{Self-describing Messages} - The strings used to query the API are self-describing and uses distinct parameters. The responses have a JSON-syntax, are also self-describing and have distinct parameters. 
+    \item \emph{Self-describing Messages} - The strings used to query the API are self-describing and uses distinct parameters. The responses have a JSON-syntax, are self-describing and have distinct parameters. 
     \item \emph{Hypermedia} - The hypermedia principle is used by the API when the requested data is too large to fit in a single response. The API uses links that it sends with the first part of the response. These links contains the URL to the rest of the queried data.
 
-    \item \emph{Self-describing Messages} - The strings used to query the API are self-describing and uses distinct parameters. The responses have a JSON-syntax, are also self-describing and have distinct parameters. 
-    \item \emph{Hypermedia} - The hypermedia principle is used by the API when the requested data is too large to fit in a single response. The API uses links that it sends with the first part of the response. These links contains the URL to the rest of the queried data.
+%    \item \emph{Self-describing Messages} - The strings used to query the API are self-describing and uses distinct parameters. The responses have a JSON-syntax, are also self-describing and have distinct parameters. 
+%    \item \emph{Hypermedia} - The hypermedia principle is used by the API when the requested data is too large to fit in a single response. The API uses links that it sends with the first part of the response. These links contains the URL to the rest of the queried data.
 \end{itemize}
  
-There are two things in the Lifelog application that is missing in the API. First, goals the user set in the app cannot be read from the API. Second, in the Lifelog application the user can bookmark different moment. These moments can neither be read from the API. Activity and profile data on the other hand can easily be read from the API. An when steps per day for example was calculated using the data form the A PI it was the same the calculation done in the app. But no data can be written to the API.
+ 
+ \subsubsection{Missing functionality}
+There are two things in the Lifelog application that are missing in the API. First, goals the user set in the application cannot be read from the API. Second, in the Lifelog application the user can bookmark different moments. These moments can neither be read from the API. Activity and profile data on the other hand can easily be read from the API. %An when steps per day for example was calculated using the data form the API it was the same the calculation done in the app. But no data can be written to the API.
 
 \subsection{Lifelog compared to other activity tracking platforms}
 
 \subsubsection{Lifelog compared to Google fit}
-Google Fit and Lifelog both have a REST API that third party users can use to fetch activity data. It is possible to write data to the Google Fit API, something that is not possible in the Lifelog API. This makes it possible to integrate data from sensors of diffrent brands in the API. Both Google and Sony provide a uniform interface for different activity trackers. Although the Lifelog API only contains data from Sony products, all their different products collects data that has the same structure in the API. Google has clearly stated that their API is not to be used in health care application. This means that Google fit is not appropriate to be used in RSAT. But besides that, Google Fit has a lot of attributes that would make it useful in RSAT. It has all the capabilities that Lifelog has and also makes it possible to import data from other sensors into the API. 
+Google Fit and Lifelog both have a REST API that third party users can use to fetch activity data. It is possible to write data to the Google Fit API, something that is not possible in the Lifelog API. This makes it possible to integrate data from sensors of diffrent brands in the API. Both Google and Sony provides a uniform interface for different activity trackers. Although the Lifelog API only contains data from Sony products, all their different products collects data that has the same structure in the API. Google has stated that their API is not to be used in health care applications. This means that Google fit is not appropriate to be used in RSAT. But besides that, Google Fit has a lot of attributes that would make it useful in RSAT. It has all the capabilities that Lifelog has and also makes it possible to import data from other sensors into the API. 
 
 
 
 \subsubsection{Lifelog compared to Apple health} 
 
-There are two big differences between Apple Health and Sony Lifelog. The first difference is that Apple Health does not have a cloud API. Apple, on the other hand, has an API that applications that users run on their phones can use to insert and fetch data. Since the Sony API is read-only, it is not possible to insert any data at all for third party users, a major disadvantage in comparison to Apple Health. The second difference is that Apple Health can be used to store both health and fitness data, while Sony Lifelog only seems to be meant for fitness data. The difference between health- and fitness data might not be big but in the future the difference might very well be more distinct and it is therefore important to mention. 
-% FÖRKLARA HÄR... 
+There are two major differences between Apple Health and Sony Lifelog. The first difference is that Apple Health does not have a cloud API. Apple, on the other hand, has an API that applications that users run on their phones can use to insert and fetch data. Since the Sony API is read-only, it is not possible to insert any data at all for third party users, a major disadvantage in comparison with Apple Health. The second difference is that Apple Health can be used to store both health and fitness data, while Sony Lifelog only seems to be meant for fitness data. 
 
 \subsubsection{Lifelog compared to Jawbone UP Platform}
 
@@ -850,12 +808,12 @@ The UP platform is more open than the Lifelog platform. The Jawbone API is both 
 
 \section{Evaluation of RSAT}
 
-In order to evaluate RSAT we compare it to other similar systems on the market. In this section a comparison with Tactio and Fruit Street is performed. It is also compared to some different wellness programs. The wellness programs does not have the same use cases as RSAT but they are none the less interesting since they are using activity trackers in their systems.
+In order to evaluate RSAT we compared it to other similar systems on the market. In this section a comparison with Tactio and Fruit Street is performed. It is also compared to some different wellness programs in working life. The wellness programs does not have the same use cases as RSAT but they are none the less interesting since they are using activity trackers in their systems.
 
 \subsection{RSAT compared to Tactio}
 
-Tactio has developed a smartphone application that is to be used by the patients. This is a fundamental difference between Tactio and RSAT. The application makes it possible for Tactio to customize each patient’s experience. We have found three major advantages with this approach. (1) Tactio users can decide by themselves what data 
-shall be shown in the application. Data they consider irrelevant in the manufacturer’s application can be ignored. (2) It makes it possible for Tactio to fetch data from sensors from several different manufacturers and to visualize the fetched data for the patient in a uniform way. This data can also be used as input to algorithms that can create new and more accurate data. (3) Custom made feedback and notification messages can be generated and sent to the applications from the clinicians. Different kinds of activity goals can also be generated by the clinicians and visualized in the application. The only disadvantage with their solution is that they have to invest a lot of resources in order to create their application such that it can deliver a good user-experience for the patients. Since most manufacturers already have created an application, Tactio must create an application that is equally good or better in order to get the patients to use theirs instead. 
+Tactio has developed a smartphone application that is to be used by the patients. This is a fundamental difference between Tactio and RSAT. The application makes it possible for Tactio to customize each patient’s experience. We have found three major advantages with this approach. (1) Tactio can decide by themselves what data 
+shall be shown in the application. Data they consider irrelevant in the manufacturer’s application can be ignored. (2) It makes it possible for Tactio to fetch data from sensors from several different manufacturers and to visualize the fetched data for the patient in a uniform way. This data can also be used as input to algorithms that can create new and more accurate data. (3) Custom made feedback and notification messages can be generated and sent to the applications from the clinicians. Different kinds of activity goals can also be generated by the clinicians and visualized in the application. TThe only disadvantage with their solution is that they have to invest a lot of resources to create an application that can deliver a good user-experience for the patients. Since most manufacturers already have created an application, Tactio must create an application that is equally good or better to get the patients to use theirs instead. 
 
 RSAT periodically downloads data from the Lifelog API and saves it on a server inside the hospital, where it is not accessible from the outside. Tactio saves the data in their own cloud and it is made accessible through an API. This API can be accessed to fetch data into other hospital systems. RSAT have no API, which can be queried from the outside of the hospital network. However, it is something that would be easy to add support for in the future if needed and wanted.  
 
@@ -863,7 +821,7 @@ The  clinicians using the Tactio system can only interact with the patients via 
 
 \subsection{RSAT compared to Fruit Street}
 
-Patients that are participating in the program where RSAT is to be used borrows a pre-configured smartphone and wristband from the health care. In Fruit Street, each patient connects their own fitness tracker. This is a significant difference between these two systems. In Fruit Street the patient has to follow a multiple stage process to add their wristband to Fruit Street  while in RSAT everything is configured and ready to go when the patient get their wristband and smartphone. 
+Patients that are participating in the program where RSAT is to be used borrows a pre-configured smartphone and wristband from the health care. In Fruit Street, each patient connects their own fitness tracker. This is a significant difference between these two systems. In Fruit Street the patient has to perform several steps to add their wristband to the system. In RSAT everything is configured and ready to be used when the patient get their wristband and smartphone. 
 
 Fruit Street is more flexible in regards to how goals can be created for each patient. The only type of goal that is possible to create in RSAT is daily goals, where in Fruit Street a goal can have an arbitrary length, meaning that you can create a monthly or weekly goal.
 
@@ -875,7 +833,7 @@ Smart wear manufacturers that are creating their own wellness programs have full
 
 \subsection{Fulfillment of requirements}
 
-In this section all requirements are reviewed. All activity data asked for in the requirements was implemented in RSAT. By using diagrams it was also possible to show the history of the data. The requirement stating the user interface shall be easy to use is hard to verify, but a popular UI library was used to make RSAT look familiar for web-users. It is easy to create goals for the different data types included in RSAT for each patient. Since a patient has the same goals in the Lifelog application as in RSAT’s database it is possible to view the goals. A problem with this is that the patient and the clinicians must meet to set the goals together. Another problem is that the clinician or patient might change the goal without the other parts knowledge, which would make the data inconsistent. The requirement for measurements of inactivity was not fulfilled. Because the possibility to get activity data in real time was limited and required the smart band to always be connected to the phone, it was decided to not implement this feature. An overview view of the patients and whether they have completed their goals was not implemented due to a lack of time. But a detailed view for every patient was implemented. The requirement of being able to add other activity trackers to RSAT are fulfilled. To add another wristband to RSAT a new service with the same commands as the Lifelog service has to be written. Besides creating a new service, the authentication to the new device must also be implemented and handled in the web application.
+In this section all requirements are reviewed. All activity data asked for in the requirements was implemented in RSAT. By using diagrams it was also possible to show the history of the data. The requirement stating the user interface shall be easy to use is hard to verify, but a popular UI library was used to make RSAT look familiar for web-users. It is easy to create goals for the different data types included in RSAT for each patient. Since a patient has the same goals in the Lifelog application as in RSAT’s database it is possible to view the goals. A problem with this is that the patient and the clinicians must meet to set the goals together. Another problem is that the clinician or patient might change the goal without the other parts knowledge, which would make the data inconsistent. The requirement for measurements of inactivity was not fulfilled. Because the possibility to get activity data in real time was limited and required the smart band to always be connected to the phone, it was decided to not implement this feature. An overview view of the patients and whether they have completed their goals was not implemented due to a lack of time. However, a detailed view for every patient was implemented. The requirement of being able to add other activity trackers to RSAT is fulfilled. To add another wristband to RSAT a new service with the same commands as the Lifelog service has to be written. Besides creating a new service, the authentication to the new device must also be implemented and handled in the web application.
 
 
 %\subsection{Summary}
@@ -929,6 +887,8 @@ In this section all requirements are reviewed. All activity data asked for in th
 
 \section{The Lifelog platform}
 
+% Lägga till användare, bökigt i vårt system... 
+
 In this section we will discuss the pros and cons of the Sony Lifelog platform from the perspective of its use in RSAT. 
 
 What is great about the Sony Lifelog platform is that its API is really easy to use. The API is REST-based, have a good documentation and all the data fetched from it have the same type of syntax. This makes it easy to both query the API and to parse its responses. However, even though the API is easy to use, it lacks some functionality, which, if existed, would have simplified the development of RSAT and also made RSAT more user friendly. 
@@ -941,13 +901,13 @@ Three problems we found during the development of RSAT, and how they was solved,
 
 \item It is not possible to send any custom data to the Lifelog application. This made it impossible for the clinicians to send custom made feedback messages to their patients. The solution to this problem would have been to built a standalone application to be used on the smartphone instead of the Lifelog application but this was not done as it would have taken too much time. 
 
-\item A user of the Lifelog platform must have a Sony or a Google account. This means that each time a patient is added to the RSAT-program, a new Sony- or Google account has to be created. The alternative would be that the patient used his or hers own account, but we can neither make the assumption that all the patients have such an account nor that they are willing to create one. 
+\item A user of the Lifelog platform must have a Sony or a Google account. This means that each time a patient is added to the RSAT-program, a new Sony or Google account has to be created. The alternative would be that the patient used his or hers own account, but we can neither make the assumption that all the patients have such an account nor that they are willing to create one. 
 
 \end{itemize}
 
 We propose two alternative ways to solve the problems listed above. 
 
-The first solution would be if Sony creates a public low level API on their smartphones, which makes it possible to fetch data directly from the wristband in use. This solution would make it possible for us to create a custom application, which fetches data directly from the wristband without the need of connecting to the web API. This would eliminate the need for a user account since the application has direct access to the data in the wristband via the low level API. Having our own app for RSAT would also make it possible to build functions for goals and feedback into the app.
+The first solution would be if Sony creates a public low level API on their smartphones, which makes it possible to fetch data directly from the wristband in use. This solution would make it possible for us to create a custom application, which fetches data directly from the wristband without the need of connecting to the web API. This would eliminate the need for a user account since the application has direct access to the data in the wristband via the low level API. Having our own application for RSAT would also make it possible to build functions for goals and feedback into the app.
 
 The second solution would be that Sony changes their Lifelog API such that the goals created in the Lifelog application can be accessed and that it is possible to write data to it. This change would make it possible for us to implement functionality for the clinicians to get or set the goals for a patient directly via the web application in RSAT. 
 
@@ -970,7 +930,7 @@ RSAT is built such that it shall be possible to integrate other activity tracker
 
 This version of RSAT fetches data from Sony’s Lifelog cloud and saves it to its own database. This might seem strange but the reason to this is to enhance the user experience. We noticed that it could take several seconds to be granted access to the Lifelog cloud and it would be very frustrating for the clinicians if they had to wait several seconds each time they requested some data. Having our own database also enables us to make large calculations of the activities for all users in one batch.  
 
-RSAT does not have as many features as similar systems, but it has a modular architecture, making it possible to add more features to it in the future. RSAT is also made to be integrated with an already existing system at Region Skåne. The possibility of running RSAT on the hospitals own IT infrastructure and making it tightly integrated with the already existing IT systems, is a thing that separate RSAT from the similar system we have seen. 
+RSAT does not have as many features as similar systems, but it has a modular architecture, making it possible to add more features to it in the future. RSAT is also made to be integrated with an already existing system at Region Skåne. The possibility of running RSAT on the hospitals own IT infrastructure and making it tightly integrated with the already existing IT systems, is a thing that separates RSAT from the similar systems we have seen. 
 
 
 %RSAT is built such that it shall be possible to integrate other activity trackers in future releases of it. However, since all data in RSAT is fetched from the Lifelog platform, adjustments has been made such that RSAT often has a similar data structure of the data types used as those in the Lifelog platform. This means that if other wearables from other manufacturers shall be connected to RSAT, there might be more work to do than what you initially might think. %Double might
@@ -992,26 +952,22 @@ RSAT does not have as many features as similar systems, but it has a modular arc
 
 \section{Future work}
 
+% PRATA OM ANGEL...
+
 Future work to be done in RSAT is to fulfill all the requirements that initially was set on it. There are two major requirements that need to be fulfilled. (1) An overview view where the clinicians can see whether the patients have fulfilled their goals or not. (2) Integration of RSAT with the planning system. 
 
 Future work to be done beyond fulfillments  of the requirements is to integrate more activity trackers with more sensors into the system.  Perhaps an activity tracker that is not as closely tied to its manufacturer’s platform as the SWR10 could be integrated. This would make it easier to enable the clinicians to send feedback messages to their patients and to handle their goals. 
 
-The best would be if a patient not had to carry a smartphone around in order to synchronize the data from the activity tracker. As a future work an investigation of using a so-called home hub instead of a smartphone could be performed. The home hub is developed as a part of the itACiH project and used in some other areas in the health care today. The home hub is  used to connect different medical sensors in the home of the patients and it would therefore be a logical step to also connect activity trackers to the hub. 
+The best would be if a patient not had to carry a smartphone around in order to synchronize the data from the activity tracker. As a future work an investigation of using a so-called home hub instead of a smartphone could be performed. The home hub is developed as a part of the itACiH project and used in some other areas in the health care today. The home hub is  used to connect different medical sensors in the home of the patients and it would therefore be a logical step to also connect activity trackers to the hub 
+and use it in the same way as the vivo hub is used. 
 
 To make it possible to fully use RSAT in the health care, security aspects of the system has to be further investigated. Also different legal aspects of the system have to be studied by lawyers. Last but not the least the medical effects of such systems has to be investigated and analyzed. 
 
- 
-
-%Future work to be done in the RSAT system is to fulfill all the requirements that initially was set on the system. The two bigger one is (1) an overview over all patents to see whether the patients have fulfilled their goals. (2) To integrate the system fully into the planning system. Future work passed the requirement for these theses is to integrate more activity tracker into the system.  Perhaps some of these activity trackers will enable the support of the feedback messages and better implementation for change of patent on a phone and easier goal handling.
-
-%A dream would to not have the patient ware a extra phone all the time just to sync the data from the SWR10. As a future work an investigation of using the home hub for this could be done. The home hub is a devise running Android installed at home of the patient. The home hub is  used to connect different medical sensors in the home of the patents. The home hub is developed as a part of the itACiH project. 
-
-%To make it possible to fully use the system in a hospital environment, security aspects of the system has to be further investigated. Also different legal aspects of the system have to be studied by lawyers. Last but not at least the medical effects of such system has to be investigated and analysed. The current system will allow for preforming pilot studies of the effects of using RSAT. 
-
+If RSAT proves to increase the physical activity of the patients, there is a chance that it could help other people with chronic diseases as well. This is an investigation to be performed as a future work of this thesis.
 
 \section{Our last words}
 
-Using the Lifelog platform we were able to build a system for tracking the activity of patients with kidney failure. RSAT can as for now be used for pilot programs with real patients to study what effects the system has on the weight loss. This can be seen as a success for this thesis. On the other hand all wishes from the physiotherapist could not be fulfilled. But hopefully this project will continue and help patients with kidney failure to loose enough weight in order to undergo a kidney transplant.
+Using the Lifelog platform we were able to build a system for tracking the activity of patients with kidney failure. RSAT can for now be used for pilot programs with real patients to study what effects the system has on the weight loss. This can be seen as a success for this thesis. On the other hand all wishes from the physiotherapist could not be fulfilled. But hopefully this project will continue and help patients with kidney failure to lose enough weight in order to undergo a kidney transplant.
 
 
 %Using the Lifelog platform we were able to build a system for tracking the activity of patients with kidney failure. RSAT can as for now be use for pilot programs with real patients to study the medical effect of this type of system. This can be seen as a success of the thesis. On the other hand due to both the time limit and the lack of futures in the Lifelog platform all wishes of the physiotherapist could not be fulfilled. But hopefully this project will continue and maybe some day, help some patients with kidney failure to lose weight and be able to undergo a kidney transplantation. 
@@ -1019,54 +975,14 @@ Using the Lifelog platform we were able to build a system for tracking the activ
    
 \makebibliography{bibliography}
 
+\begin{appendices}
+\chapter{Definitions}
+TODO!
+\chapter{Manaul for RSAT}
+
+\includepdf[pages={1,2,3,4,5}]{Manual.pdf}
+
+\end{appendices}
+
 \end{document}
 
-\begin{comment}
-\chapter{Approach}
-
-%% Skriva ner totala målet osv... Kravspec på systemet... 
-
-
-\section{First project plan}
-We, Jens and Alfred sat down with one of our advisers Fredrik. He had make an proposal for a timetable and we where together collaborate and made it more reasonable. This is the first version of the time timetable. The timetable is divided in to four different parts, around 1 month each.
-
-\subsection{Part one}
-From mid February to mid March.
-
-\begin{itemize}
-\item A standalone system the can be reach from the internet with a interface that is easy to use.
-\item Be able to see steps and sleep for a group of patients, including the possibility of setting goals.
-\item The people testing in the part is Mia, Fredrik , Jens and Alfred. 
-\end{itemize}
-
-\subsection{Part two}
-From mid March to mid April.
-\begin{itemize}
-\item Authorization should be atomized using for example a Android app. 
-\item The system should be able present walking time, running time, biking time, inactivity time and number of calories including the possibility of setting goals.
-\item The people testing in the part is Mia, Fredrik, Jens, Alfred, Bosse and the team.
-\end{itemize}
-
-
-\subsection{Part three}
-From mid April to mid May.
-\begin{itemize}
-\item Integration with the itACiH system.
-\item Target achievement appear in the list of patients.
-\item Reminder of long inactivity
-\item In the test group is Mia, Fredrik, Jens, Alfred, Bosse, the team and selected patients.
-\end{itemize}
-
-\subsection{Part four}
-From mid May to mid June.
-
-\begin{itemize}
-\item The master thesis end.
-\item The pilot study run for some more time.
-\item Bravo message when goals are accomplished if time allows.
-\item More custom goal if time allows.
-\item Sharp testing with real patients.
-\end{itemize}
-
-
-\end{comment}
